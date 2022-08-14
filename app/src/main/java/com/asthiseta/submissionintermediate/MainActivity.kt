@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.asthiseta.submissionintermediate.databinding.ActivityMainBinding
+import com.asthiseta.submissionintermediate.ui.home.HomeFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var mainActivityMainBinding: ActivityMainBinding
@@ -14,6 +15,7 @@ class MainActivity : AppCompatActivity() {
         mainActivityMainBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mainActivityMainBinding.root)
         supportActionBar?.hide()
+        moveToFragment(HomeFragment())
     }
 
     fun moveToFragment(fragment: Fragment){

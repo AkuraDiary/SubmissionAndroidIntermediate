@@ -24,7 +24,7 @@ android {
 
         debug{
             buildConfigField "String", "BASE_URL", '"https://story-api.dicoding.dev/v1/"'
-            buildConfigField "String", "PREF_NAME", "usr_login"
+            buildConfigField "String", "PREF_NAME", '"usr_login"'
         }
         release {
             buildConfigField "String", "BASE_URL", '"https://story-api.dicoding.dev/v1/"'

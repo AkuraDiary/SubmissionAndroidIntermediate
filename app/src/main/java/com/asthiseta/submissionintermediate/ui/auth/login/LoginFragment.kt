@@ -84,6 +84,8 @@ class LoginFragment : Fragment() {
                         setPositiveButton("Ok") { _, _ ->
                             (activity as MainActivity).moveToFragment(HomeFragment())
                         }
+                        create()
+                        show()
                     }
                 }
 
