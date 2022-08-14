@@ -1,12 +1,13 @@
 package com.asthiseta.submissionintermediate.data.remote
 
-import com.squareup.moshi.Moshi
+
+import com.asthiseta.submissionintermediate.BuildConfig
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
-object ApiConfig {
+object RetrofitConfig {
     fun getApiService(): ApiService {
         val loggingInterceptor =
             HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
@@ -14,7 +15,7 @@ object ApiConfig {
             .addInterceptor(loggingInterceptor)
             .build()
         val retrofit = Retrofit.Builder()
-            .baseUrl("baseUrl")
+            .baseUrl(BuildConfig.BASE_URL)
             .addConverterFactory(MoshiConverterFactory.create())
             .client(client)
             .build()
