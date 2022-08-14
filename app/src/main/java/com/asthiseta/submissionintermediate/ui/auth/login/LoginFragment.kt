@@ -8,7 +8,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import android.view.inputmethod.InputMethodManager
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.asthiseta.submissionintermediate.BuildConfig.PREF_NAME
@@ -122,6 +123,6 @@ class LoginFragment : Fragment() {
     }
 
     private fun showMessage(message: String){
-        FancyToast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+        FancyToast.makeText(requireContext(), message, FancyToast.LENGTH_SHORT, FancyToast.INFO, false).show()
     }
 }
