@@ -29,7 +29,7 @@ class MyCustomPassword : AppCompatEditText{
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
         hint = "Password"
-
+        height = 48
         textAlignment = View.TEXT_ALIGNMENT_VIEW_START
     }
     @SuppressLint("ClickableViewAccessibility")
