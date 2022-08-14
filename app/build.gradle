@@ -16,10 +16,19 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
     }
 
     buildTypes {
+
+
+        debug{
+            buildConfigField "String", "BASE_URL", '"https://story-api.dicoding.dev/v1/"'
+            buildConfigField "String", "PREF_NAME", "usr_login"
+        }
         release {
+            buildConfigField "String", "BASE_URL", '"https://story-api.dicoding.dev/v1/"'
+            buildConfigField "String", "PREF_NAME", '"usr_login"'
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -57,7 +66,7 @@ dependencies {
     //Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation "com.squareup.retrofit2:converter-moshi:2.9.0"
-    implementation "com.squareup.okhttp3:logging-interceptor:4.9.1"
+    implementation "com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.2"
 
     //Glide
     implementation "com.github.bumptech.glide:glide:4.13.1"
@@ -70,5 +79,11 @@ dependencies {
     //Glide
     implementation 'com.github.bumptech.glide:glide:4.13.1'
     kapt 'com.github.bumptech.glide:compiler:4.11.0'
+
+    //shimmer
+    implementation "com.facebook.shimmer:shimmer:0.5.0"
+
+    //Fancy Toast
+    implementation 'io.github.shashank02051997:FancyToast:2.0.2'
 
 }
