@@ -4,6 +4,9 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/SumissionAndroidIntermediate/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/SumissionAndroidIntermediate/app/src/main/res/layout/home_fragment.xml" value="0.22395833333333334" />
+        <entry key="..\:/SumissionAndroidIntermediate/app/src/main/res/layout/login_fragment.xml" value="0.22291666666666668" />
+        <entry key="..\:/SumissionAndroidIntermediate/app/src/main/res/layout/register_fragment.xml" value="0.22291666666666668" />
       </map>
     </option>
   </component>

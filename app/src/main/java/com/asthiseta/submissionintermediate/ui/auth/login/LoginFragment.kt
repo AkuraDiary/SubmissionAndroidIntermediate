@@ -31,7 +31,7 @@ class LoginFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         loginFragmentBinding = LoginFragmentBinding.inflate(inflater, container, false)
         initVM()
         initPref()
