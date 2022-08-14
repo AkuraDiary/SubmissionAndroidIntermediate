@@ -2,10 +2,25 @@ package com.asthiseta.submissionintermediate
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
+import com.asthiseta.submissionintermediate.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var mainActivityMainBinding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        mainActivityMainBinding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(mainActivityMainBinding.root)
+        supportActionBar?.hide()
+    }
+
+    fun moveToFragment(fragment: Fragment){
+        this.supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.mainFragmentContainer, fragment)
+            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+            .commit()
     }
 }

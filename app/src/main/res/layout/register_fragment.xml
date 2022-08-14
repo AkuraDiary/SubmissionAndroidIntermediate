@@ -82,10 +82,10 @@
         app:layout_constraintTop_toBottomOf="@id/textInputLayoutUsername"
         app:layout_constraintVertical_bias="0.0">
 
-        <com.google.android.material.textfield.TextInputEditText
+        <com.asthiseta.submissionintermediate.myViews.MyCustomEmail
             android:id="@+id/textInputTextEmail"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:hint="Email"
             android:inputType="textEmailAddress" />
     </com.google.android.material.textfield.TextInputLayout>
