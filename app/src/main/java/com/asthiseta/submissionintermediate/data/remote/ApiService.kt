@@ -14,7 +14,7 @@ interface ApiService {
 
     @FormUrlEncoded
     @POST("register")
-    fun registerUser(
+    fun userRegister(
         @Field("name") name: String,
         @Field("email") email: String,
         @Field("password") password: String
@@ -22,19 +22,19 @@ interface ApiService {
 
     @FormUrlEncoded
     @POST("login")
-    fun loginUser(
+    fun userLogin(
         @Field("email") email: String,
         @Field("password")password: String
     ): Call<UserLoginResponse>
 
     @GET("stories")
-    fun getListStory(
+    fun getAllStory(
         @Header("Authorization") auth: String
     ): Call<StoryListResponse>
 
     @Multipart
     @POST("stories")
-    fun uploadImage(
+    fun uploadStory(
         @Header("Authorization") auth: String,
         @Part file: MultipartBody.Part,
         @Part("description") description: RequestBody,
