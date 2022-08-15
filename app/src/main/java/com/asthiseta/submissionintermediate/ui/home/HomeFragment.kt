@@ -43,10 +43,10 @@ class HomeFragment : Fragment() {
     }
 
     private fun initView(){
-        homeBinding.logoutButton.setOnClickListener{
-            usrLoginPref.logout()
-            (activity as MainActivity).moveToFragment(LoginFragment())
-        }
+//        homeBinding.logoutButton.setOnClickListener{
+//            usrLoginPref.logout()
+//            (activity as MainActivity).moveToFragment(LoginFragment())
+//        }
     }
 
     private fun doLogout(){
