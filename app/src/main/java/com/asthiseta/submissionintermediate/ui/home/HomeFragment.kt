@@ -1,19 +1,15 @@
 package com.asthiseta.submissionintermediate.ui.home
 
-import android.content.SharedPreferences
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.asthiseta.submissionintermediate.MainActivity
-import com.asthiseta.submissionintermediate.R
 import com.asthiseta.submissionintermediate.adapter.StoryAdapter
-import com.asthiseta.submissionintermediate.data.preferences.UserLoginPreferences
 import com.asthiseta.submissionintermediate.databinding.HomeFragmentBinding
-import com.asthiseta.submissionintermediate.ui.auth.AuthVM
-import com.asthiseta.submissionintermediate.ui.auth.login.LoginFragment
-import com.shashank.sony.fancytoastlib.FancyToast
 
 class HomeFragment : Fragment() {
     private lateinit var homeBinding: HomeFragmentBinding
@@ -61,7 +57,7 @@ class HomeFragment : Fragment() {
                 }
             }
             isLoading.observe(requireActivity()) { showLoading(it) }
-            //message.observe(requireActivity()) { (activity as MainActivity).showMessage(it) }
+
         }
     }
     private fun initView(){

@@ -1,12 +1,11 @@
 package com.asthiseta.submissionintermediate
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
-import com.asthiseta.submissionintermediate.data.model.stories.Story
 import com.asthiseta.submissionintermediate.data.preferences.UserLoginPreferences
 import com.asthiseta.submissionintermediate.databinding.ActivityMainBinding
 import com.asthiseta.submissionintermediate.ui.auth.login.LoginFragment

@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import com.asthiseta.submissionintermediate.data.model.stories.Story
 import com.asthiseta.submissionintermediate.data.model.stories.StoryListResponse
 import com.asthiseta.submissionintermediate.data.remote.RetrofitConfig
-import com.asthiseta.submissionintermediate.ui.auth.AuthVM
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

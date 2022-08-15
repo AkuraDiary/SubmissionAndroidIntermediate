@@ -1,10 +1,8 @@
 package com.asthiseta.submissionintermediate.ui.detail
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import com.asthiseta.submissionintermediate.databinding.ActivityDetailBinding
 import com.bumptech.glide.Glide
 

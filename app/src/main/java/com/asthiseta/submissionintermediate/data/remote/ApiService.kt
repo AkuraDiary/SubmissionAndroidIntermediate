@@ -1,7 +1,6 @@
 package com.asthiseta.submissionintermediate.data.remote
 
 import com.asthiseta.submissionintermediate.data.model.auth.UserLoginResponse
-import com.asthiseta.submissionintermediate.data.model.auth.UserRegisterRequest
 import com.asthiseta.submissionintermediate.data.model.auth.UserRegisterResponse
 import com.asthiseta.submissionintermediate.data.model.stories.AddStoryResponse
 import com.asthiseta.submissionintermediate.data.model.stories.StoryListResponse
