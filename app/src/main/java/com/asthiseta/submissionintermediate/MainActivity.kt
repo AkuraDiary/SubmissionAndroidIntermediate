@@ -28,7 +28,4 @@ class MainActivity : AppCompatActivity() {
             .commit()
     }
 
-    companion object{
-        lateinit var clickedStory : Story
-    }
 }
