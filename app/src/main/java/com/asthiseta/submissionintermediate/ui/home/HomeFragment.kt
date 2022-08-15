@@ -1,21 +1,24 @@
 package com.asthiseta.submissionintermediate.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.ActivityOptionsCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.asthiseta.submissionintermediate.MainActivity
 import com.asthiseta.submissionintermediate.adapter.StoryAdapter
 import com.asthiseta.submissionintermediate.databinding.HomeFragmentBinding
+import com.asthiseta.submissionintermediate.ui.addStory.UploadStoryActivity
 
 class HomeFragment : Fragment() {
     private lateinit var homeBinding: HomeFragmentBinding
     lateinit var viewModel: HomeViewModel
 
-    lateinit var _adapter : StoryAdapter
+    lateinit var _adapter: StoryAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -45,13 +48,12 @@ class HomeFragment : Fragment() {
     }
 
 
-
-    private fun initViewModel(){
+    private fun initViewModel() {
         viewModel = ViewModelProvider(requireActivity())[HomeViewModel::class.java]
 
         viewModel.apply {
             getAllStoriesData((activity as MainActivity).usrLoginPref.getLoginData().token)
-            listStoryData.observe(requireActivity()){
+            listStoryData.observe(requireActivity()) {
                 if (it != null) {
                     _adapter.setStoryData(it)
                 }
@@ -60,7 +62,8 @@ class HomeFragment : Fragment() {
 
         }
     }
-    private fun initView(){
+
+    private fun initView() {
 
         homeBinding.apply {
             rvStory.apply {
@@ -68,9 +71,15 @@ class HomeFragment : Fragment() {
                 setHasFixedSize(true)
                 adapter = _adapter
             }
+
+            fabAddStory.setOnClickListener {
+                val intent = Intent(requireActivity(), UploadStoryActivity::class.java)
+                startActivity(intent)
+            }
         }
     }
-    private fun showLoading(isLoading : Boolean){
+
+    private fun showLoading(isLoading: Boolean) {
         homeBinding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 
