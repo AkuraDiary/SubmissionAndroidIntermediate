@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/storyLayoutRoot"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="4dp"
+    android:elevation="4dp"
+    app:cardCornerRadius="10dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="8dp">
+
+        <ImageView
+            android:id="@+id/story_image"
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            android:background="@color/grey"
+            android:contentDescription="Gambar Story"
+            android:transitionName="photo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_storyTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:transitionName="name"
+            android:textColor="@color/grey"
+            android:background="@color/grey"
+            app:layout_constraintStart_toStartOf="@+id/story_image"
+            app:layout_constraintTop_toBottomOf="@+id/story_image"
+            tools:text="INI JUDUL" />
+
+        <TextView
+            android:id="@+id/tv_storyDesc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:maxLines="5"
+            android:textColor="@color/grey"
+            android:background="@color/grey"
+            android:transitionName="description"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/tv_storyTitle"
+            app:layout_constraintTop_toBottomOf="@+id/tv_storyTitle"
+            tools:text="INI DESKRIPSI" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
