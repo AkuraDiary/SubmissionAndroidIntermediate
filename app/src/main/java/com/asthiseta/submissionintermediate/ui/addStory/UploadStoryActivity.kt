@@ -87,13 +87,19 @@ class UploadStoryActivity : AppCompatActivity() {
         UploadStoryUtilities.createTempFile(application).also {
             val photoURI: Uri = FileProvider.getUriForFile(
                 this@UploadStoryActivity,
-                "com.asthiseta",
+                "com.asthiseta.submissionintermediate",
                 it
             )
             currentPath = it.absolutePath
             intent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
             cameraIntentLauncher.launch(intent)
         }
+    }
+
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        startActivity(Intent(this, MainActivity::class.java))
     }
 
     private fun openGallery() {

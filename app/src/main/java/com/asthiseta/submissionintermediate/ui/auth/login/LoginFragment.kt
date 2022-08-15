@@ -52,7 +52,10 @@ class LoginFragment : Fragment() {
     private fun initView(){
         loginFragmentBinding.apply {
             loginButton.setOnClickListener{
+                showLoading(true)
+                showMessage("Loging in, please wait")
                 validateAndLogin()
+                showLoading(false)
             }
             toRegister.setOnClickListener{
                 (activity as MainActivity).moveToFragment(RegisterFragment())
@@ -67,8 +70,6 @@ class LoginFragment : Fragment() {
         authVM.apply {
             doLogin(usrEmail, usrPass)
             usrLogin.observe(viewLifecycleOwner){
-                showLoading(true)
-                showMessage("Loging in, please wait")
                 if (it != null){
                     //save the login session
                     usrLoginPref.setUsrLogin(UsrSession(

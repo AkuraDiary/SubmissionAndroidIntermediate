@@ -50,7 +50,10 @@ class RegisterFragment : Fragment() {
     private fun initView(){
         registerFragmentBinding.apply {
             registerButton.setOnClickListener{
+                showMessage("Registering")
+                showLoading(true)
                 validateAndRegister()
+                showLoading(false)
 
             }
             toLogin.setOnClickListener{
@@ -65,8 +68,6 @@ class RegisterFragment : Fragment() {
         val usrPass =registerFragmentBinding.textInputTextPass.text.toString().trim()
 
         authVM.apply {
-            showMessage("Loading")
-            showLoading(true)
             doRegister(username, usrEmail, usrPass)
         }
 
