@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.asthiseta.submissionintermediate.MainActivity
@@ -20,7 +21,6 @@ class HomeFragment : Fragment() {
     private lateinit var _adapter: StoryAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
 
         _adapter = StoryAdapter()
 
@@ -44,23 +44,23 @@ class HomeFragment : Fragment() {
         }
 
         initView()
-    }
-
-
-    private fun initViewModel() {
-        viewModel = ViewModelProvider(requireActivity())[HomeViewModel::class.java]
-
         viewModel.apply {
             showLoading(true)
             getAllStoriesData((activity as MainActivity).usrLoginPref.getLoginData().token)
             listStoryData.observe(requireActivity()) {
                 if (it != null) {
                     _adapter.setStoryData(it)
+                    _adapter.notifyDataSetChanged()
                 }
             }
             isLoading.observe(requireActivity()) { showLoading(it) }
-
         }
+    }
+
+
+    private fun initViewModel() {
+        viewModel = ViewModelProvider(requireActivity())[HomeViewModel::class.java]
+
     }
 
     private fun initView() {
@@ -73,8 +73,11 @@ class HomeFragment : Fragment() {
             }
 
             fabAddStory.setOnClickListener {
+
                 val intent = Intent(requireActivity(), UploadStoryActivity::class.java)
                 startActivity(intent)
+                FragmentManager.POP_BACK_STACK_INCLUSIVE
+                requireActivity().finish()
             }
         }
     }
