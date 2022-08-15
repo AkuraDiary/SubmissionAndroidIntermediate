@@ -1,9 +1,5 @@
 package com.asthiseta.submissionintermediate.data.model.auth
 
-data class UserLoginRequest(
-    val email: String,
-    val password: String
-)
 
 data class UserLoginResult(
     var name: String,

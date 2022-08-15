@@ -13,7 +13,7 @@ import java.util.*
 
 object UploadStoryUtilities {
 
-    fun uriToFile(selectedImg: Uri, context : Context): File? {
+    fun uriToFile(selectedImg: Uri, context : Context): File {
         val contentResolver: ContentResolver = context.contentResolver
         val myFile = createTempFile(context)
 

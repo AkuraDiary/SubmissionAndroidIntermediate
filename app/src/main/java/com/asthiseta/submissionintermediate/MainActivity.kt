@@ -38,10 +38,6 @@ class MainActivity : AppCompatActivity() {
         return super.onCreateOptionsMenu(menu)
     }
 
-    fun showMessage(message: String){
-        FancyToast.makeText(this, message, FancyToast.LENGTH_SHORT, FancyToast.INFO, false).show()
-    }
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId){
             R.id.logoutMenu -> {

@@ -1,11 +1,12 @@
 package com.asthiseta.submissionintermediate.data.preferences
 
 import android.content.Context
+import android.content.SharedPreferences
 import com.asthiseta.submissionintermediate.BuildConfig.PREF_NAME
 import com.asthiseta.submissionintermediate.data.model.auth.UsrSession
 
 class UserLoginPreferences(context: Context) {
-    val pref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+    private val pref: SharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
     private val editor = pref.edit()
 
     fun setUsrLogin(user: UsrSession){

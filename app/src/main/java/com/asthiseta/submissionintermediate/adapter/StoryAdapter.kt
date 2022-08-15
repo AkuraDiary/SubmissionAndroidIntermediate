@@ -14,8 +14,8 @@ import com.asthiseta.submissionintermediate.ui.detail.DetailActivity
 import com.bumptech.glide.Glide
 
 class StoryAdapter : RecyclerView.Adapter<StoryAdapter.ViewHolder>() {
-    val listStoryData = ArrayList<Story>()
-    inner class ViewHolder(val binding: StoryLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
+    private val listStoryData = ArrayList<Story>()
+    inner class ViewHolder(private val binding: StoryLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(story: Story) {
             binding.apply {
                 Glide.with(itemView.context)

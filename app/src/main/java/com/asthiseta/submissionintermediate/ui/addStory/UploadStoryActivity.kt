@@ -5,19 +5,16 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
-import androidx.core.content.PackageManagerCompat
 import com.asthiseta.submissionintermediate.MainActivity
-import com.asthiseta.submissionintermediate.R
 import com.asthiseta.submissionintermediate.data.model.stories.AddStoryResponse
 import com.asthiseta.submissionintermediate.data.preferences.UserLoginPreferences
 import com.asthiseta.submissionintermediate.data.remote.RetrofitConfig
-import com.asthiseta.submissionintermediate.databinding.ActivityDetailBinding
 import com.asthiseta.submissionintermediate.databinding.ActivityUploadStoryBinding
 import com.asthiseta.submissionintermediate.utilities.UploadStoryUtilities
 import com.asthiseta.submissionintermediate.utilities.UploadStoryUtilities.reduceFileImage
@@ -30,14 +27,13 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Response.error
 import java.io.File
 
 class UploadStoryActivity : AppCompatActivity() {
     private lateinit var binding: ActivityUploadStoryBinding
 
-    lateinit var currentPath: String
-    lateinit var usrLoginPref: UserLoginPreferences
+    private lateinit var currentPath: String
+    private lateinit var usrLoginPref: UserLoginPreferences
 
     private var getFile: File? = null
 
@@ -51,7 +47,7 @@ class UploadStoryActivity : AppCompatActivity() {
 
     }
 
-    fun initView() {
+    private fun initView() {
         binding.apply {
             btnOpenCamera.setOnClickListener { openCamera() }
             btnOpenGallery.setOnClickListener { openGallery() }
@@ -143,7 +139,7 @@ class UploadStoryActivity : AppCompatActivity() {
         ContextCompat.checkSelfPermission(baseContext, it) == PackageManager.PERMISSION_GRANTED
     }
 
-    fun uploadStory() {
+    private fun uploadStory() {
         if (getFile != null) {
             val file = reduceFileImage(getFile as File)
             val descriptionText = binding.editTextAddDescription.text.toString()

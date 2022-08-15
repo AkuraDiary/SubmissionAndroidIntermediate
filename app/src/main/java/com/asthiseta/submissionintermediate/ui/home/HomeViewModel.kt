@@ -18,7 +18,7 @@ class HomeViewModel : ViewModel() {
     val isLoading: LiveData<Boolean> = _isLoading
 
     private val _message = MutableLiveData<String>()
-    val message: LiveData<String> = _message
+
 
 
     fun getAllStoriesData(auth: String){

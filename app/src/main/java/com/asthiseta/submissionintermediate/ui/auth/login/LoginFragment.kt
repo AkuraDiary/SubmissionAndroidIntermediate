@@ -23,7 +23,7 @@ class LoginFragment : Fragment() {
     private lateinit var loginFragmentBinding: LoginFragmentBinding
     private lateinit var authVM: AuthVM
     private lateinit var pref: SharedPreferences
-    lateinit var usrLoginPref: UserLoginPreferences
+    private lateinit var usrLoginPref: UserLoginPreferences
 
     override fun onCreateView(
         inflater: LayoutInflater,
