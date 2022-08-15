@@ -7,36 +7,12 @@
     android:padding="16dp"
     tools:context=".ui.addStory.UploadStoryActivity">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/teftFieldDesc"
-        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/btn_openCamera"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <com.google.android.material.textfield.TextInputEditText
-
-            android:id="@+id/editTextAddDescription"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="top|start"
-            android:hint="Deskripsi Gambar"
-            android:inputType="textMultiLine"
-            android:lines="8"
-            android:maxLines="6"
-            android:scrollbars="vertical" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
     <ImageView
         android:id="@+id/imageViewPreview"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/teftFieldDesc"
+        app:layout_constraintBottom_toTopOf="@+id/textFieldDesc"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -49,10 +25,10 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:drawableTop="@drawable/ic_camera"
-        android:padding="20dp"
+        android:padding="5dp"
         android:text="Camera"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/btnUpload"
+        app:layout_constraintBottom_toTopOf="@+id/textFieldDesc"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -69,13 +45,36 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:drawableTop="@drawable/ic_image"
-        android:padding="20dp"
+        android:padding="5dp"
         android:text="Galery"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/btnUpload"
+        app:layout_constraintBottom_toTopOf="@+id/textFieldDesc"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline" />
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textFieldDesc"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnUpload"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+
+            android:id="@+id/editTextAddDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top|start"
+            android:hint="Deskripsi Gambar"
+            android:inputType="textMultiLine"
+            android:lines="6"
+            android:maxLines="6"
+            android:scrollbars="vertical" />
+
+    </com.google.android.material.textfield.TextInputLayout>
     <Button
         android:id="@+id/btnUpload"
         android:layout_width="0dp"
