@@ -52,6 +52,7 @@ class HomeFragment : Fragment() {
         viewModel = ViewModelProvider(requireActivity())[HomeViewModel::class.java]
 
         viewModel.apply {
+            showLoading(true)
             getAllStoriesData((activity as MainActivity).usrLoginPref.getLoginData().token)
             listStoryData.observe(requireActivity()) {
                 if (it != null) {
