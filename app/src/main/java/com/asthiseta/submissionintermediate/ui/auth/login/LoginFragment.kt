@@ -41,6 +41,7 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (activity as MainActivity).supportActionBar?.hide()
         initView()
     }
 
@@ -69,7 +70,8 @@ class LoginFragment : Fragment() {
         authVM.apply {
             doLogin(usrEmail, usrPass)
             usrLogin.observe(viewLifecycleOwner){
-                //showLoading(true)
+                showLoading(true)
+                showMessage("Loging in, please wait")
                 if (it != null){
                     //save the login session
                     usrLoginPref.setUsrLogin(UsrSession(

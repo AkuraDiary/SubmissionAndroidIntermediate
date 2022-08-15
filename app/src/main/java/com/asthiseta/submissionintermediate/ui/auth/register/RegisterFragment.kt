@@ -37,6 +37,7 @@ class RegisterFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (activity as MainActivity).supportActionBar?.hide()
         initView()
     }
 
@@ -65,6 +66,8 @@ class RegisterFragment : Fragment() {
         val usrPass =registerFragmentBinding.textInputTextPass.text.toString().trim()
 
         authVM.apply {
+            showMessage("Loading")
+            showLoading(true)
             doRegister(username, usrEmail, usrPass)
         }
 

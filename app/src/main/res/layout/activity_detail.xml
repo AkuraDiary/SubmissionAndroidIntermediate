@@ -32,7 +32,7 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/detailStoryContainer"
-            android:visibility="gone"
+            android:visibility="visible"
             android:layout_width="350dp"
             android:layout_height="400dp"
             android:layout_gravity="center"
@@ -44,22 +44,33 @@
                 android:orientation="vertical"
                 android:layout_height="match_parent">
                 <TextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginTop="16dp"
+                    android:gravity="center"
+                    android:textSize="18sp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:transitionName="name"
+                    android:text="Info min" />
+                <TextView
                     android:id="@+id/tv_storyTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="16dp"
-                    android:fontFamily="sans-serif-smallcaps"
                     android:textSize="32sp"
                     android:textStyle="bold"
                     android:transitionName="name"
-                    tools:text="INI JUDUL" />
+                    android:text="INI JUDUL" />
 
                 <TextView
                     android:id="@+id/tv_storyDesc"
+                    android:padding="8dp"
                     android:layout_width="match_parent"
-                    android:layout_height="300dp"
-                    android:layout_marginStart="8dp"
+                    android:layout_height="250dp"
                     android:layout_marginTop="8dp"
                     android:transitionName="description"
                     tools:text="INI DESKRIPSI" />
@@ -70,11 +81,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:textColor="@color/black"
                     android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
+                    android:textSize="16sp"
+                    android:layout_marginTop="18dp"
                     android:textStyle="bold"
                     android:transitionName="description"
-                    tools:text="Tap To Close" />
+                    android:text="Tap To Close" />
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
