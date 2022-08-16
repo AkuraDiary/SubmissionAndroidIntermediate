@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.util.Pair
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.asthiseta.submissionintermediate.data.model.stories.Story
 import com.asthiseta.submissionintermediate.databinding.StoryLayoutBinding
@@ -61,10 +62,12 @@ class StoryAdapter : RecyclerView.Adapter<StoryAdapter.ViewHolder>() {
         return listStoryData.size
     }
 
-    @SuppressLint("NotifyDataSetChanged")
     fun setStoryData(story : ArrayList<Story>){
+        val diffCallback = StoryCallback(listStoryData, story)
+        val diffResult = DiffUtil.calculateDiff(diffCallback)
         listStoryData.clear()
         listStoryData.addAll(story)
-        notifyDataSetChanged()
+        diffResult.dispatchUpdatesTo(this)
+
     }
 }
