@@ -19,7 +19,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:transitionName="photo"
-            tools:srcCompat="@tools:sample/avatars" />
+            tools:srcCompat="@tools:sample/avatars"
+            android:contentDescription="@string/contentDescIV" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:layout_gravity="bottom"
@@ -29,7 +30,8 @@
             android:layout_height="wrap_content"
             android:transitionName="fab"
             android:clickable="true"
-            app:srcCompat="@drawable/ic_info" />
+            app:srcCompat="@drawable/ic_info"
+            android:contentDescription="@string/txt_info" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/detailStoryContainer"
@@ -55,7 +57,7 @@
                     android:textColor="@color/black"
                     android:textStyle="bold"
                     android:transitionName="name"
-                    android:text="Info min" />
+                    android:text="@string/txt_info_min" />
                 <TextView
                     android:id="@+id/tv_storyTitle"
                     android:layout_width="wrap_content"
@@ -65,7 +67,7 @@
                     android:textSize="32sp"
                     android:textStyle="bold"
                     android:transitionName="name"
-                    android:text="INI JUDUL" />
+                    android:text="@string/txt_judul" />
 
                 <TextView
                     android:id="@+id/tv_storyDesc"
@@ -74,7 +76,7 @@
                     android:layout_height="250dp"
                     android:layout_marginTop="8dp"
                     android:transitionName="description"
-                    tools:text="INI DESKRIPSI" />
+                    android:text="@string/txt_ini_deskripsi" />
 
                 <TextView
                     android:id="@+id/tvDetailClose"
@@ -88,7 +90,7 @@
                     android:layout_marginTop="18dp"
                     android:textStyle="bold"
                     android:transitionName="description"
-                    android:text="Tap To Close" />
+                    android:text="@string/txt_tap_to_close" />
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>

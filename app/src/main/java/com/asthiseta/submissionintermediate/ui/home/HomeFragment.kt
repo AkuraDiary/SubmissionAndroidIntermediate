@@ -13,7 +13,7 @@ import com.asthiseta.submissionintermediate.databinding.HomeFragmentBinding
 import com.asthiseta.submissionintermediate.ui.addStory.UploadStoryActivity
 
 class HomeFragment : Fragment() {
-    private lateinit var homeBinding: HomeFragmentBinding
+    private  var homeBinding: HomeFragmentBinding? = null
 
 
     override fun onCreateView(
@@ -22,8 +22,8 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         homeBinding = HomeFragmentBinding.inflate(layoutInflater)
-        //initViewModel()
-        return homeBinding.root
+
+        return homeBinding!!.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -41,11 +41,11 @@ class HomeFragment : Fragment() {
 
     private fun initView() {
 
-        homeBinding.apply {
+        homeBinding?.apply {
             rvStory.apply {
                 layoutManager = LinearLayoutManager(requireContext())
                 setHasFixedSize(true)
-                adapter = (activity as MainActivity)._adapter
+                adapter = (activity as MainActivity).storyAdapter
             }
 
             fabAddStory.setOnClickListener {
@@ -56,6 +56,11 @@ class HomeFragment : Fragment() {
                 requireActivity().finish()
             }
         }
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        homeBinding = null
     }
 
 }

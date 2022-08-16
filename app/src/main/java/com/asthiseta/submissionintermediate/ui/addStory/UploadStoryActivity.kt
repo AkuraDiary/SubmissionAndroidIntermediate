@@ -53,8 +53,6 @@ class UploadStoryActivity : AppCompatActivity() {
             btnOpenGallery.setOnClickListener { openGallery() }
             btnUpload.setOnClickListener {
                 uploadStory()
-//                startActivity(Intent(this@UploadStoryActivity, MainActivity::class.java))
-//                finish()
             }
         }
 

@@ -7,6 +7,7 @@ import android.text.TextWatcher
 import android.util.AttributeSet
 import android.view.View
 import androidx.appcompat.widget.AppCompatEditText
+import com.asthiseta.submissionintermediate.R
 
 class MyCustomEmail: AppCompatEditText {
 
@@ -28,7 +29,7 @@ class MyCustomEmail: AppCompatEditText {
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 if(!android.util.Patterns.EMAIL_ADDRESS.matcher(s!!).matches()) {
-                    error = "Email tidak valid"
+                    error = context.getString(R.string.txt_invalid_email)
                 }
 
             }

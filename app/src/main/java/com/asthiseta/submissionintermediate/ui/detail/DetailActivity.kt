@@ -7,23 +7,23 @@ import com.asthiseta.submissionintermediate.databinding.ActivityDetailBinding
 import com.bumptech.glide.Glide
 
 class DetailActivity : AppCompatActivity(){
-    private lateinit var detailBinding: ActivityDetailBinding
+    private var detailBinding: ActivityDetailBinding? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         detailBinding = ActivityDetailBinding.inflate(layoutInflater)
-        setContentView(detailBinding.root)
+        setContentView(detailBinding!!.root)
         supportActionBar?.hide()
         initView()
         showDetail()
     }
 
     private fun initView(){
-        detailBinding.fabShowInfo.setOnClickListener {
-            detailBinding.detailStoryContainer.visibility = View.VISIBLE
+        detailBinding?.fabShowInfo?.setOnClickListener {
+            detailBinding?.detailStoryContainer!!.visibility = View.VISIBLE
         }
 
-        detailBinding.tvDetailClose.setOnClickListener{
-            detailBinding.detailStoryContainer.visibility = View.GONE
+        detailBinding?.tvDetailClose?.setOnClickListener{
+            detailBinding?.detailStoryContainer!!.visibility = View.GONE
         }
     }
 
@@ -32,12 +32,17 @@ class DetailActivity : AppCompatActivity(){
         val desc = intent.getStringExtra("DESC")
         val img = intent.getStringExtra("IMAGE")
 
-        detailBinding.apply {
+        detailBinding?.apply {
             tvStoryDesc.text = desc
             tvStoryTitle.text = name
             Glide.with(this@DetailActivity)
                 .load(img)
                 .into(storyImage)
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        detailBinding = null
     }
 }

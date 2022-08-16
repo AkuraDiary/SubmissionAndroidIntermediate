@@ -15,18 +15,18 @@ import com.asthiseta.submissionintermediate.ui.home.HomeFragment
 import com.asthiseta.submissionintermediate.ui.home.HomeViewModel
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var mainActivityMainBinding: ActivityMainBinding
+    private var mainActivityMainBinding: ActivityMainBinding? = null
     private lateinit var usrLoginPref: UserLoginPreferences
     private lateinit var homeViewModel: HomeViewModel
-    lateinit var _adapter: StoryAdapter
+    lateinit var storyAdapter: StoryAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mainActivityMainBinding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(mainActivityMainBinding.root)
+        setContentView(mainActivityMainBinding!!.root)
         usrLoginPref = UserLoginPreferences(this)
         supportActionBar?.hide()
         initViewModel()
-        _adapter = StoryAdapter()
+        storyAdapter = StoryAdapter()
         checkSession()
     }
 
@@ -69,8 +69,7 @@ class MainActivity : AppCompatActivity() {
                 getAllStoriesData(usrLoginPref.getLoginData().token)
                 listStoryData.observe(this@MainActivity) {
                     if (it != null) {
-                        _adapter.setStoryData(it)
-                        _adapter.notifyDataSetChanged()
+                        storyAdapter.setStoryData(it)
                     }
                 }
 
@@ -79,7 +78,10 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
+    override fun onDestroy() {
+        super.onDestroy()
+        mainActivityMainBinding = null
+    }
     private fun doLogout(){
         usrLoginPref.logout()
         moveToFragment(LoginFragment())

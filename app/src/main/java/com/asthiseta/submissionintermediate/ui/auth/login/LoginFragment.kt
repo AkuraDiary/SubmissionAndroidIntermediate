@@ -20,7 +20,7 @@ import com.asthiseta.submissionintermediate.ui.home.HomeFragment
 import com.shashank.sony.fancytoastlib.FancyToast
 
 class LoginFragment : Fragment() {
-    private lateinit var loginFragmentBinding: LoginFragmentBinding
+    private var loginFragmentBinding: LoginFragmentBinding? = null
     private lateinit var authVM: AuthVM
     private lateinit var pref: SharedPreferences
     private lateinit var usrLoginPref: UserLoginPreferences
@@ -33,7 +33,7 @@ class LoginFragment : Fragment() {
         loginFragmentBinding = LoginFragmentBinding.inflate(inflater, container, false)
         initVM()
         initPref()
-        return loginFragmentBinding.root
+        return loginFragmentBinding!!.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -50,7 +50,7 @@ class LoginFragment : Fragment() {
 
 
     private fun initView(){
-        loginFragmentBinding.apply {
+        loginFragmentBinding?.apply {
             loginButton.setOnClickListener{
                 showLoading(true)
                 showMessage("Loging in, please wait")
@@ -64,8 +64,8 @@ class LoginFragment : Fragment() {
     }
 
     private fun doLogin(){
-        val usrEmail = loginFragmentBinding.textInputTextEmail.text.toString().trim()
-        val usrPass =loginFragmentBinding.textInputTextPass.text.toString().trim()
+        val usrEmail = loginFragmentBinding?.textInputTextEmail?.text.toString().trim()
+        val usrPass = loginFragmentBinding?.textInputTextPass?.text.toString().trim()
 
         authVM.apply {
             doLogin(usrEmail, usrPass)
@@ -104,12 +104,12 @@ class LoginFragment : Fragment() {
 
     private fun validateAndLogin() {
         when {
-            loginFragmentBinding.textInputTextEmail.text!!.isBlank() -> {
-                loginFragmentBinding.textInputTextEmail.error = "Username is required"
+            loginFragmentBinding?.textInputTextEmail?.text!!.isBlank() -> {
+                loginFragmentBinding?.textInputTextEmail?.error = "Username is required"
                 return
             }
-            loginFragmentBinding.textInputTextPass.text!!.isBlank() -> {
-                loginFragmentBinding.textInputTextPass.error = "Password is required"
+            loginFragmentBinding?.textInputTextPass?.text!!.isBlank() -> {
+                loginFragmentBinding?.textInputTextPass!!.error = "Password is required"
                 return
             }
         }
@@ -119,10 +119,15 @@ class LoginFragment : Fragment() {
     }
 
     private fun showLoading(isLoading : Boolean){
-        loginFragmentBinding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+        loginFragmentBinding?.progressBar!!.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 
     private fun showMessage(message: String){
         FancyToast.makeText(requireContext(), message, FancyToast.LENGTH_SHORT, FancyToast.INFO, false).show()
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        loginFragmentBinding = null
     }
 }

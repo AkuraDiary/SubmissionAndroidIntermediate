@@ -18,7 +18,7 @@ import com.asthiseta.submissionintermediate.ui.auth.login.LoginFragment
 import com.shashank.sony.fancytoastlib.FancyToast
 
 class RegisterFragment : Fragment() {
-    private lateinit var registerFragmentBinding: RegisterFragmentBinding
+    private var registerFragmentBinding: RegisterFragmentBinding? = null
     private lateinit var authVM: AuthVM
     private lateinit var pref: SharedPreferences
     private lateinit var usrLoginPref: UserLoginPreferences
@@ -31,7 +31,7 @@ class RegisterFragment : Fragment() {
         registerFragmentBinding = RegisterFragmentBinding.inflate(inflater, container, false)
         initVM()
         initPref()
-        return registerFragmentBinding.root
+        return registerFragmentBinding!!.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -45,10 +45,15 @@ class RegisterFragment : Fragment() {
         usrLoginPref = UserLoginPreferences(requireContext())
     }
 
+    override fun onDetach() {
+        super.onDetach()
+        registerFragmentBinding = null
+    }
+
 
 
     private fun initView(){
-        registerFragmentBinding.apply {
+        registerFragmentBinding?.apply {
             registerButton.setOnClickListener{
                 showMessage("Registering")
                 showLoading(true)
@@ -63,9 +68,9 @@ class RegisterFragment : Fragment() {
     }
 
     private fun doRegister(){
-        val username = registerFragmentBinding.textInputTextUsername.text.toString().trim()
-        val usrEmail = registerFragmentBinding.textInputTextEmail.text.toString().trim()
-        val usrPass =registerFragmentBinding.textInputTextPass.text.toString().trim()
+        val username = registerFragmentBinding?.textInputTextUsername?.text.toString().trim()
+        val usrEmail = registerFragmentBinding?.textInputTextEmail?.text.toString().trim()
+        val usrPass = registerFragmentBinding?.textInputTextPass?.text.toString().trim()
 
         authVM.apply {
             doRegister(username, usrEmail, usrPass)
@@ -83,12 +88,12 @@ class RegisterFragment : Fragment() {
 
     private fun validateAndRegister() {
         when {
-            registerFragmentBinding.textInputTextEmail.text!!.isBlank() -> {
-                registerFragmentBinding.textInputTextEmail.error = "Username is required"
+            registerFragmentBinding?.textInputTextEmail?.text!!.isBlank() -> {
+                registerFragmentBinding?.textInputTextEmail!!.error = "Username is required"
                 return
             }
-            registerFragmentBinding.textInputTextPass.text!!.isBlank() -> {
-                registerFragmentBinding.textInputTextPass.error = "Password is required"
+            registerFragmentBinding!!.textInputTextPass.text!!.isBlank() -> {
+                registerFragmentBinding!!.textInputTextPass.error = "Password is required"
                 return
             }
         }
@@ -98,7 +103,7 @@ class RegisterFragment : Fragment() {
     }
 
     private fun showLoading(isLoading : Boolean){
-        registerFragmentBinding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+        registerFragmentBinding?.progressBar!!.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 
     private fun showMessage(message: String){
