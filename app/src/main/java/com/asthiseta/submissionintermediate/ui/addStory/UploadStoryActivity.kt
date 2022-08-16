@@ -53,8 +53,8 @@ class UploadStoryActivity : AppCompatActivity() {
             btnOpenGallery.setOnClickListener { openGallery() }
             btnUpload.setOnClickListener {
                 uploadStory()
-                startActivity(Intent(this@UploadStoryActivity, MainActivity::class.java))
-                finish()
+//                startActivity(Intent(this@UploadStoryActivity, MainActivity::class.java))
+//                finish()
             }
         }
 
@@ -158,8 +158,7 @@ class UploadStoryActivity : AppCompatActivity() {
             )
 
             val token = "Bearer ${usrLoginPref.getLoginData().token}"
-            val service =
-                RetrofitConfig.getApiService().uploadStory(token, imageMultipart, description)
+            val service = RetrofitConfig.getApiService().uploadStory(token, imageMultipart, description)
             service.enqueue(object : Callback<AddStoryResponse> {
                 override fun onResponse(call: Call<AddStoryResponse>, response: Response<AddStoryResponse>) {
                     if (response.isSuccessful) {
@@ -172,6 +171,7 @@ class UploadStoryActivity : AppCompatActivity() {
                                 FancyToast.SUCCESS,
                                 false
                             ).show()
+                            onBackPressed()
                         } else {
                             FancyToast.makeText(
                                 this@UploadStoryActivity,
@@ -204,6 +204,7 @@ class UploadStoryActivity : AppCompatActivity() {
                 false
             ).show()
         }
+
     }
 
     companion object {

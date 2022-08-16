@@ -6,22 +6,27 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.ViewModelProvider
+import com.asthiseta.submissionintermediate.adapter.StoryAdapter
 import com.asthiseta.submissionintermediate.data.preferences.UserLoginPreferences
 import com.asthiseta.submissionintermediate.databinding.ActivityMainBinding
 import com.asthiseta.submissionintermediate.ui.auth.login.LoginFragment
 import com.asthiseta.submissionintermediate.ui.home.HomeFragment
-import com.shashank.sony.fancytoastlib.FancyToast
+import com.asthiseta.submissionintermediate.ui.home.HomeViewModel
 
 class MainActivity : AppCompatActivity() {
     private lateinit var mainActivityMainBinding: ActivityMainBinding
-    lateinit var usrLoginPref: UserLoginPreferences
-
+    private lateinit var usrLoginPref: UserLoginPreferences
+    private lateinit var homeViewModel: HomeViewModel
+    lateinit var _adapter: StoryAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mainActivityMainBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mainActivityMainBinding.root)
         usrLoginPref = UserLoginPreferences(this)
         supportActionBar?.hide()
+        initViewModel()
+        _adapter = StoryAdapter()
         checkSession()
     }
 
@@ -31,6 +36,11 @@ class MainActivity : AppCompatActivity() {
             .replace(R.id.mainFragmentContainer, fragment)
             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
             .commit()
+    }
+
+    private fun initViewModel() {
+        homeViewModel = ViewModelProvider(this)[HomeViewModel::class.java]
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -50,11 +60,25 @@ class MainActivity : AppCompatActivity() {
 
     private fun checkSession(){
         if(!usrLoginPref.getLoginData().isLogin){
+
             moveToFragment(LoginFragment())
+
         }else{
+            homeViewModel.apply {
+
+                getAllStoriesData(usrLoginPref.getLoginData().token)
+                listStoryData.observe(this@MainActivity) {
+                    if (it != null) {
+                        _adapter.setStoryData(it)
+                        _adapter.notifyDataSetChanged()
+                    }
+                }
+
+            }
             moveToFragment(HomeFragment())
         }
     }
+
 
     private fun doLogout(){
         usrLoginPref.logout()

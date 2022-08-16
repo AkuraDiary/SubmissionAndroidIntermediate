@@ -15,7 +15,6 @@ class HomeViewModel : ViewModel() {
     val listStoryData : LiveData<ArrayList<Story>> = _listStoryData
 
     private val _isLoading = MutableLiveData<Boolean>()
-    val isLoading: LiveData<Boolean> = _isLoading
 
     private val _message = MutableLiveData<String>()
 
