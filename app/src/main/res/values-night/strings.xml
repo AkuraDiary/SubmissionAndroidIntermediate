@@ -7,4 +7,18 @@
     <string name="txt_tap_to_close">Tap To Close</string>
     <string name="txt_invalid_email">Email tidak valid</string>
     <string name="txt_info">Info Story</string>
+    <string name="ttxt_camera">Camera</string>
+    <string name="txt_galery">Galery</string>
+    <string name="txt_deskripsi_gambar">Deskripsi Gambar</string>
+    <string name="txt_welcome_back">Welcome Back</string>
+    <string name="txt_please_login">Please Login</string>
+    <string name="txt_password">Password</string>
+    <string name="txt_login">Login</string>
+    <string name="txt_don_t_have_account">Don\'t have account?</string>
+    <string name="txt_register">Register</string>
+    <string name="txt_welcome">Welcome</string>
+    <string name="txt_create_account">Create Account</string>
+    <string name="txt_username">Username</string>
+    <string name="txt_email">Email</string>
+    <string name="txt_already_have_account">Already Have Account?</string>
 </resources>

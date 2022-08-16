@@ -57,7 +57,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_camera"
-        android:contentDescription="Add Story" />
+        android:contentDescription="@string/txt_add_story" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

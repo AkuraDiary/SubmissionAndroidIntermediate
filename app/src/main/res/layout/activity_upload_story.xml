@@ -17,7 +17,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/ic_insert_photo"/>
+        app:srcCompat="@drawable/ic_insert_photo"
+        android:contentDescription="@string/contentDescIV" />
 
     <Button
         android:id="@+id/btn_openCamera"
@@ -26,7 +27,7 @@
         android:layout_marginEnd="8dp"
         android:drawableTop="@drawable/ic_camera"
         android:padding="5dp"
-        android:text="Camera"
+        android:text="@string/ttxt_camera"
         android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/textFieldDesc"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
@@ -46,7 +47,7 @@
         android:layout_marginStart="8dp"
         android:drawableTop="@drawable/ic_image"
         android:padding="5dp"
-        android:text="Galery"
+        android:text="@string/txt_galery"
         android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/textFieldDesc"
         app:layout_constraintEnd_toEndOf="parent"
@@ -68,7 +69,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="top|start"
-            android:hint="Deskripsi Gambar"
+            android:hint="@string/txt_deskripsi_gambar"
             android:inputType="textMultiLine"
             android:lines="6"
             android:maxLines="6"
@@ -79,7 +80,7 @@
         android:id="@+id/btnUpload"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Upload"
+        android:text="@string/txt_upload"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

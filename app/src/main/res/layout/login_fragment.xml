@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
         android:paddingHorizontal="16dp"
-        android:text="Welcome Back"
+        android:text="@string/txt_welcome_back"
         android:textColor="@color/primary_900"
         android:textSize="48sp"
         android:textStyle="bold"
@@ -27,7 +27,7 @@
         android:id="@+id/sloganText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Please Login"
+        android:text="@string/txt_please_login"
         android:textColor="@color/primary_900"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -92,7 +92,7 @@
             android:id="@+id/textInputTextPass"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="Password"
+            android:hint="@string/txt_password"
             android:inputType="textPassword"
             tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck" />
 
@@ -105,9 +105,9 @@
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="24dp"
         android:background="@color/primary_900"
-        android:text="Login"
+        android:text="@string/txt_login"
         android:textColor="@color/white"
-        android:textSize="18dp"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -131,7 +131,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="6dp"
             android:layout_weight="1"
-            android:text="Don't have account?"
+            android:text="@string/txt_don_t_have_account"
             android:textAlignment="textEnd" />
 
         <TextView
@@ -139,7 +139,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Register"
+            android:text="@string/txt_register"
             android:textColor="@color/neutral_700"
             android:textStyle="bold" />
     </LinearLayout>

@@ -19,7 +19,7 @@
             android:layout_width="0dp"
             android:layout_height="200dp"
             android:background="@color/grey"
-            android:contentDescription="Gambar Story"
+            android:contentDescription="@string/txt_deskripsi_gambar"
             android:transitionName="photo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -38,7 +38,7 @@
             android:background="@color/grey"
             app:layout_constraintStart_toStartOf="@+id/story_image"
             app:layout_constraintTop_toBottomOf="@+id/story_image"
-            tools:text="INI JUDUL" />
+            tools:text="@string/txt_judul" />
 
         <TextView
             android:id="@+id/tv_storyDesc"
@@ -54,7 +54,7 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/tv_storyTitle"
             app:layout_constraintTop_toBottomOf="@+id/tv_storyTitle"
-            tools:text="INI DESKRIPSI" />
+            tools:text="@string/txt_ini_deskripsi" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
