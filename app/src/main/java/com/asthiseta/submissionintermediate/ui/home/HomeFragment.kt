@@ -33,13 +33,15 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         storyAdapter = StoryAdapter()
-        initViewModel()
+
         (activity as MainActivity).supportActionBar?.apply {
             title = "STORIES"
             show()
         }
-
         initView()
+        homeBinding?.progressBar!!.visibility = View.VISIBLE
+        initViewModel()
+        homeBinding?.progressBar!!.visibility = View.GONE
     }
     private fun initViewModel() {
         homeViewModel = ViewModelProvider(this)[HomeViewModel::class.java]

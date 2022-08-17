@@ -32,15 +32,16 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         loginFragmentBinding = LoginFragmentBinding.inflate(inflater, container, false)
-        initVM()
-        initPref()
+        initView()
         return loginFragmentBinding!!.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as MainActivity).supportActionBar?.hide()
-        initView()
+        initVM()
+        initPref()
+
     }
 
     private fun initPref(){
@@ -53,10 +54,9 @@ class LoginFragment : Fragment() {
     private fun initView(){
         loginFragmentBinding?.apply {
             loginButton.setOnClickListener{
-                showLoading(true)
                 showMessage("Loging in, please wait")
                 validateAndLogin()
-                showLoading(false)
+
             }
             toRegister.setOnClickListener{
                 (activity as MainActivity).moveToFragment(RegisterFragment())
@@ -65,9 +65,9 @@ class LoginFragment : Fragment() {
     }
 
     private fun doLogin(){
+        showLoading(true)
         val usrEmail = loginFragmentBinding?.textInputTextEmail?.text.toString().trim()
         val usrPass = loginFragmentBinding?.textInputTextPass?.text.toString().trim()
-
         authVM.apply {
             doLogin(usrEmail, usrPass)
             usrLogin.observe(viewLifecycleOwner){
@@ -82,7 +82,7 @@ class LoginFragment : Fragment() {
                     )
 
                     usrLoginPref.setUsrLogin(currentUser)
-
+                    showLoading(false)
                     AlertDialog.Builder(requireContext()).apply {
                         setTitle("Login Succesfully")
                         setMessage("Logged in as ${it.name}!")
@@ -120,10 +120,11 @@ class LoginFragment : Fragment() {
         //doLogin
         doLogin()
 
+
     }
 
     private fun showLoading(isLoading : Boolean){
-        loginFragmentBinding?.progressBar!!.visibility = if (isLoading) View.VISIBLE else View.GONE
+        loginFragmentBinding?.progressBar!!.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 
     private fun showMessage(message: String){

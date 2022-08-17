@@ -20,26 +20,23 @@
         tools:listitem="@layout/story_layout" />
 
     <com.facebook.shimmer.ShimmerFrameLayout
-        android:id="@+id/progressBar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/progressBar"
+            android:visibility="visible"
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <androidx.recyclerview.widget.RecyclerView
-
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="4dp"
-                android:padding="4dp"
-                tools:listitem="@layout/story_layout_shimmer" />
+            <include layout="@layout/story_layout_shimmer" />
+            <include layout="@layout/story_layout_shimmer" />
+            <include layout="@layout/story_layout_shimmer" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
     </com.facebook.shimmer.ShimmerFrameLayout>

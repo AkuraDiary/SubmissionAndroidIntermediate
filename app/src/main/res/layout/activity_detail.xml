@@ -35,7 +35,7 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/detailStoryContainer"
-            android:visibility="visible"
+            android:visibility="gone"
             android:layout_width="350dp"
             android:layout_height="400dp"
             android:layout_gravity="center"

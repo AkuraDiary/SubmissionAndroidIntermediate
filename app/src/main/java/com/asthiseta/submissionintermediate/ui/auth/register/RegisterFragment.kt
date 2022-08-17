@@ -56,9 +56,7 @@ class RegisterFragment : Fragment() {
         registerFragmentBinding?.apply {
             registerButton.setOnClickListener{
                 showMessage("Registering")
-                showLoading(true)
                 validateAndRegister()
-                showLoading(false)
 
             }
             toLogin.setOnClickListener{
@@ -68,6 +66,7 @@ class RegisterFragment : Fragment() {
     }
 
     private fun doRegister(){
+        showLoading(true)
         val username = registerFragmentBinding?.textInputTextUsername?.text.toString().trim()
         val usrEmail = registerFragmentBinding?.textInputTextEmail?.text.toString().trim()
         val usrPass = registerFragmentBinding?.textInputTextPass?.text.toString().trim()
@@ -75,6 +74,7 @@ class RegisterFragment : Fragment() {
         authVM.apply {
             doRegister(username, usrEmail, usrPass)
         }
+        showLoading(false)
 
     }
 
@@ -103,7 +103,7 @@ class RegisterFragment : Fragment() {
     }
 
     private fun showLoading(isLoading : Boolean){
-        registerFragmentBinding?.progressBar!!.visibility = if (isLoading) View.VISIBLE else View.GONE
+        registerFragmentBinding?.progressBar!!.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 
     private fun showMessage(message: String){
