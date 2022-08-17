@@ -1,6 +1,5 @@
 package com.asthiseta.submissionintermediate.adapter
 
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.view.LayoutInflater
@@ -11,7 +10,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.asthiseta.submissionintermediate.data.model.stories.Story
 import com.asthiseta.submissionintermediate.databinding.StoryLayoutBinding
-import com.asthiseta.submissionintermediate.ui.detail.DetailActivity
+import com.asthiseta.submissionintermediate.ui.activities.DetailActivity
 import com.bumptech.glide.Glide
 
 class StoryAdapter : RecyclerView.Adapter<StoryAdapter.ViewHolder>() {

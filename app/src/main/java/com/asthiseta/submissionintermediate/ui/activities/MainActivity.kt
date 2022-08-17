@@ -1,4 +1,4 @@
-package com.asthiseta.submissionintermediate
+package com.asthiseta.submissionintermediate.ui.activities
 
 import android.os.Bundle
 import android.view.Menu
@@ -7,13 +7,11 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
-import androidx.lifecycle.ViewModelProvider
-import com.asthiseta.submissionintermediate.adapter.StoryAdapter
+import com.asthiseta.submissionintermediate.R
 import com.asthiseta.submissionintermediate.data.preferences.UserLoginPreferences
 import com.asthiseta.submissionintermediate.databinding.ActivityMainBinding
 import com.asthiseta.submissionintermediate.ui.auth.login.LoginFragment
 import com.asthiseta.submissionintermediate.ui.home.HomeFragment
-import com.asthiseta.submissionintermediate.ui.home.HomeViewModel
 
 class MainActivity : AppCompatActivity() {
     private var mainActivityMainBinding: ActivityMainBinding? = null

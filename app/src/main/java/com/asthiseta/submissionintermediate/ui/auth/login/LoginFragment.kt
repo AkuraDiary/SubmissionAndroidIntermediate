@@ -11,7 +11,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.asthiseta.submissionintermediate.BuildConfig.PREF_NAME
-import com.asthiseta.submissionintermediate.MainActivity
+import com.asthiseta.submissionintermediate.ui.activities.MainActivity
 import com.asthiseta.submissionintermediate.data.model.auth.UsrSession
 import com.asthiseta.submissionintermediate.data.preferences.UserLoginPreferences
 import com.asthiseta.submissionintermediate.databinding.LoginFragmentBinding

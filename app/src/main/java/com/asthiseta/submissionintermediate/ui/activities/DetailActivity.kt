@@ -1,4 +1,4 @@
-package com.asthiseta.submissionintermediate.ui.detail
+package com.asthiseta.submissionintermediate.ui.activities
 
 import android.os.Bundle
 import android.view.View

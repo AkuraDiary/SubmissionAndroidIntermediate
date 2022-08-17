@@ -10,7 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.asthiseta.submissionintermediate.BuildConfig
-import com.asthiseta.submissionintermediate.MainActivity
+import com.asthiseta.submissionintermediate.ui.activities.MainActivity
 import com.asthiseta.submissionintermediate.data.preferences.UserLoginPreferences
 import com.asthiseta.submissionintermediate.databinding.RegisterFragmentBinding
 import com.asthiseta.submissionintermediate.ui.auth.AuthVM
