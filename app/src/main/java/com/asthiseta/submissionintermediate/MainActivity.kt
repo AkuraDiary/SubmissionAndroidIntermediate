@@ -3,6 +3,7 @@ package com.asthiseta.submissionintermediate
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
@@ -56,6 +57,13 @@ class MainActivity : AppCompatActivity() {
         }else{
             moveToFragment(HomeFragment())
         }
+    }
+
+    fun showLoading(isLoading : Boolean){
+        mainActivityMainBinding?.progressBar!!.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+    }
+    fun showShimmerLoading(isLoading : Boolean){
+        mainActivityMainBinding?.progressBarShimmer?.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 
     override fun onDestroy() {

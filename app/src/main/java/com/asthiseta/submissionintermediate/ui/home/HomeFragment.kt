@@ -2,6 +2,7 @@ package com.asthiseta.submissionintermediate.ui.home
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,9 +14,10 @@ import com.asthiseta.submissionintermediate.MainActivity
 import com.asthiseta.submissionintermediate.adapter.StoryAdapter
 import com.asthiseta.submissionintermediate.databinding.HomeFragmentBinding
 import com.asthiseta.submissionintermediate.ui.addStory.UploadStoryActivity
+import com.shashank.sony.fancytoastlib.FancyToast
 
 class HomeFragment : Fragment() {
-    private  var homeBinding: HomeFragmentBinding? = null
+    private var homeBinding: HomeFragmentBinding? = null
     private lateinit var homeViewModel: HomeViewModel
 
     private lateinit var storyAdapter: StoryAdapter
@@ -39,12 +41,16 @@ class HomeFragment : Fragment() {
             show()
         }
         initView()
-        homeBinding?.progressBar!!.visibility = View.VISIBLE
+
         initViewModel()
-        homeBinding?.progressBar!!.visibility = View.GONE
+
     }
+
     private fun initViewModel() {
         homeViewModel = ViewModelProvider(this)[HomeViewModel::class.java]
+
+        homeViewModel.isLoading.observe(viewLifecycleOwner) { showLoading(it) }
+        homeViewModel.message.observe(viewLifecycleOwner) { showMessage(it) }
 
         homeViewModel.apply {
 
@@ -58,8 +64,21 @@ class HomeFragment : Fragment() {
         }
     }
 
+    private fun showMessage(message: String) {
 
+        FancyToast.makeText(
+            requireContext(),
+            message,
+            FancyToast.LENGTH_SHORT,
+            FancyToast.INFO,
+            false
+        ).show()
 
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        (activity as MainActivity).showShimmerLoading(isLoading)
+    }
 
 
     private fun initView() {

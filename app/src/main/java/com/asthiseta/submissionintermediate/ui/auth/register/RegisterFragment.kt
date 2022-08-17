@@ -103,7 +103,7 @@ class RegisterFragment : Fragment() {
     }
 
     private fun showLoading(isLoading : Boolean){
-        registerFragmentBinding?.progressBar!!.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+        (activity as MainActivity).showLoading(isLoading)
     }
 
     private fun showMessage(message: String){

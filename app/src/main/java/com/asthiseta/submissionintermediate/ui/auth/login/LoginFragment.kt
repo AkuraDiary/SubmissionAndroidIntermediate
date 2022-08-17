@@ -44,36 +44,34 @@ class LoginFragment : Fragment() {
 
     }
 
-    private fun initPref(){
+    private fun initPref() {
         pref = requireContext().getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
         usrLoginPref = UserLoginPreferences(requireContext())
     }
 
 
-
-    private fun initView(){
+    private fun initView() {
         loginFragmentBinding?.apply {
-            loginButton.setOnClickListener{
+            loginButton.setOnClickListener {
                 showMessage("Loging in, please wait")
                 validateAndLogin()
 
             }
-            toRegister.setOnClickListener{
+            toRegister.setOnClickListener {
                 (activity as MainActivity).moveToFragment(RegisterFragment())
             }
         }
     }
 
-    private fun doLogin(){
+    private fun doLogin() {
         showLoading(true)
         val usrEmail = loginFragmentBinding?.textInputTextEmail?.text.toString().trim()
         val usrPass = loginFragmentBinding?.textInputTextPass?.text.toString().trim()
         authVM.apply {
             doLogin(usrEmail, usrPass)
-            usrLogin.observe(viewLifecycleOwner){
-                if (it != null){
+            usrLogin.observe(viewLifecycleOwner) {
+                if (it != null) {
                     //save the login session
-
                     val currentUser = UsrSession(
                         it.name,
                         it.token,
@@ -82,7 +80,6 @@ class LoginFragment : Fragment() {
                     )
 
                     usrLoginPref.setUsrLogin(currentUser)
-                    showLoading(false)
                     AlertDialog.Builder(requireContext()).apply {
                         setTitle("Login Succesfully")
                         setMessage("Logged in as ${it.name}!")
@@ -99,11 +96,11 @@ class LoginFragment : Fragment() {
 
     }
 
-    private fun initVM(){
+    private fun initVM() {
         authVM = ViewModelProvider(requireActivity())[AuthVM::class.java]
 
-        authVM.isLoading.observe(viewLifecycleOwner){showLoading(it)}
-        authVM.message.observe(viewLifecycleOwner){showMessage(it)}
+        authVM.isLoading.observe(viewLifecycleOwner) { showLoading(it) }
+        authVM.message.observe(viewLifecycleOwner) { showMessage(it) }
     }
 
     private fun validateAndLogin() {
@@ -123,12 +120,19 @@ class LoginFragment : Fragment() {
 
     }
 
-    private fun showLoading(isLoading : Boolean){
-        loginFragmentBinding?.progressBar!!.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+    private fun showLoading(isLoading: Boolean) {
+        (activity as MainActivity).showLoading(isLoading)
+        Log.d("Login isLoading", isLoading.toString())
     }
 
-    private fun showMessage(message: String){
-        FancyToast.makeText(requireContext(), message, FancyToast.LENGTH_SHORT, FancyToast.INFO, false).show()
+    private fun showMessage(message: String) {
+        FancyToast.makeText(
+            requireContext(),
+            message,
+            FancyToast.LENGTH_SHORT,
+            FancyToast.INFO,
+            false
+        ).show()
     }
 
     override fun onDetach() {

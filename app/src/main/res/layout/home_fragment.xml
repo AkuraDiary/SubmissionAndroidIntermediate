@@ -19,27 +19,27 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:listitem="@layout/story_layout" />
 
-    <com.facebook.shimmer.ShimmerFrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+<!--    <com.facebook.shimmer.ShimmerFrameLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent">-->
 
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:id="@+id/progressBar"
-            android:visibility="visible"
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+<!--        <androidx.appcompat.widget.LinearLayoutCompat-->
+<!--            android:id="@+id/progressBar"-->
+<!--            android:visibility="visible"-->
+<!--            android:orientation="vertical"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent">-->
 
-            <include layout="@layout/story_layout_shimmer" />
-            <include layout="@layout/story_layout_shimmer" />
-            <include layout="@layout/story_layout_shimmer" />
+<!--            <include layout="@layout/story_layout_shimmer" />-->
+<!--            <include layout="@layout/story_layout_shimmer" />-->
+<!--            <include layout="@layout/story_layout_shimmer" />-->
 
-        </androidx.appcompat.widget.LinearLayoutCompat>
-    </com.facebook.shimmer.ShimmerFrameLayout>
+<!--        </androidx.appcompat.widget.LinearLayoutCompat>-->
+<!--    </com.facebook.shimmer.ShimmerFrameLayout>-->
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

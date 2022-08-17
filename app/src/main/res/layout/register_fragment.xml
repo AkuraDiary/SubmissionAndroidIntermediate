@@ -165,17 +165,16 @@
             android:textColor="@color/neutral_700"
             android:textStyle="bold" />
     </LinearLayout>
-
-    <include
-        android:id="@+id/progressBar"
-        android:visibility="gone"
-        layout="@layout/loading_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+<!--    <include-->
+<!--        android:id="@+id/progressBar"-->
+<!--        android:visibility="gone"-->
+<!--        layout="@layout/loading_layout"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
 
 
 </androidx.constraintlayout.motion.widget.MotionLayout>

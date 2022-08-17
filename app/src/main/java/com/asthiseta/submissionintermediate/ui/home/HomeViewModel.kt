@@ -11,12 +11,15 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class HomeViewModel : ViewModel() {
+
     private val _listStoryData = MutableLiveData<ArrayList<Story>>()
     val listStoryData : LiveData<ArrayList<Story>> = _listStoryData
 
     private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading : LiveData<Boolean> = _isLoading
 
     private val _message = MutableLiveData<String>()
+    val message : LiveData<String> = _message
 
 
 
