@@ -2,7 +2,6 @@ package com.asthiseta.submissionintermediate.data.preferences
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.util.Log
 import com.asthiseta.submissionintermediate.BuildConfig.PREF_NAME
 import com.asthiseta.submissionintermediate.data.model.auth.UsrSession
 
@@ -30,15 +29,14 @@ class UserLoginPreferences(context: Context) {
         }
     }
 
-    fun getLoginData(): UsrSession{
-        val logedUser = UsrSession(
+    fun getLoginData(): UsrSession {
+
+        return UsrSession(
             pref.getString(NAME_KEY, "").toString(),
             pref.getString(TOKEN_KEY, "").toString(),
             pref.getString(USER_ID_KEY, "").toString(),
             pref.getBoolean(STATE_KEY, false)
         )
-        Log.d("UserLoginPreferences", "getLoginData: $logedUser")
-        return logedUser
     }
 
     companion object{

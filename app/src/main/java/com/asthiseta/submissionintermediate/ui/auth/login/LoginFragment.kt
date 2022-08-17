@@ -81,7 +81,6 @@ class LoginFragment : Fragment() {
                         true
                     )
 
-                    Log.d("LoginFragment", "doLogin: $currentUser")
                     usrLoginPref.setUsrLogin(currentUser)
 
                     AlertDialog.Builder(requireContext()).apply {
