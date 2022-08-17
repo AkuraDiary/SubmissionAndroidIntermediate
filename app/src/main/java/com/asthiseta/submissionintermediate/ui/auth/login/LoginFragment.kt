@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -72,12 +73,16 @@ class LoginFragment : Fragment() {
             usrLogin.observe(viewLifecycleOwner){
                 if (it != null){
                     //save the login session
-                    usrLoginPref.setUsrLogin(UsrSession(
+
+                    val currentUser = UsrSession(
                         it.name,
                         it.token,
                         it.userId,
                         true
-                    ))
+                    )
+
+                    Log.d("LoginFragment", "doLogin: $currentUser")
+                    usrLoginPref.setUsrLogin(currentUser)
 
                     AlertDialog.Builder(requireContext()).apply {
                         setTitle("Login Succesfully")

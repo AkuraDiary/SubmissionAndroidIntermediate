@@ -2,6 +2,7 @@ package com.asthiseta.submissionintermediate.data.preferences
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.util.Log
 import com.asthiseta.submissionintermediate.BuildConfig.PREF_NAME
 import com.asthiseta.submissionintermediate.data.model.auth.UsrSession
 
@@ -14,7 +15,7 @@ class UserLoginPreferences(context: Context) {
             putString(NAME_KEY, user.name)
             putString(TOKEN_KEY, user.token)
             putString(USER_ID_KEY, user.userId)
-            putBoolean(USER_ID_KEY, user.isLogin)
+            putBoolean(STATE_KEY, user.isLogin)
             apply()
         }
     }
@@ -23,18 +24,21 @@ class UserLoginPreferences(context: Context) {
         editor.apply {
             remove(NAME_KEY)
             remove(TOKEN_KEY)
+            remove(USER_ID_KEY)
             putBoolean(STATE_KEY, false)
             apply()
         }
     }
 
     fun getLoginData(): UsrSession{
-        return UsrSession(
-            pref.getString(NAME_KEY,"") ?: "",
-            pref.getString(TOKEN_KEY,"") ?: "",
-            pref.getString(USER_ID_KEY,"") ?: "",
+        val logedUser = UsrSession(
+            pref.getString(NAME_KEY, "").toString(),
+            pref.getString(TOKEN_KEY, "").toString(),
+            pref.getString(USER_ID_KEY, "").toString(),
             pref.getBoolean(STATE_KEY, false)
         )
+        Log.d("UserLoginPreferences", "getLoginData: $logedUser")
+        return logedUser
     }
 
     companion object{
