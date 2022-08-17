@@ -28,7 +28,9 @@ interface ApiService {
 
     @GET("stories")
     fun getAllStory(
-        @Header("Authorization") auth: String
+        @Header("Authorization") auth: String,
+        @Query("page") page: Int,
+        @Query("size") size: Int
     ): Call<StoryListResponse>
 
     @Multipart
