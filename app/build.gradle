@@ -47,6 +47,7 @@ android {
 
 dependencies {
 
+    //default dependencies
     implementation 'androidx.core:core-ktx:1.8.0'
     implementation 'androidx.appcompat:appcompat:1.5.0'
     implementation 'com.google.android.material:material:1.6.1'
@@ -82,5 +83,49 @@ dependencies {
 
     //Fancy Toast
     implementation 'io.github.shashank02051997:FancyToast:2.0.2'
+
+    //dependency injection w/ dagger hilt
+    implementation "com.google.dagger:hilt-android:2.41"
+    kapt "com.google.dagger:hilt-compiler:2.41"
+
+    //paging dependencies
+    implementation "androidx.paging:paging-runtime-ktx:3.1.1"
+    implementation "androidx.room:room-paging:2.4.3"
+
+    //room dependencies
+    implementation "androidx.room:room-ktx:2.4.3"
+    kapt "androidx.room:room-compiler:2.4.3"
+    implementation "androidx.activity:activity-ktx:1.5.1"
+
+    // Test dependencies
+    //mockito
+    testImplementation 'org.mockito:mockito-core:3.12.4'
+    testImplementation 'org.mockito:mockito-inline:3.12.4'
+
+    testImplementation "androidx.arch.core:core-testing:2.1.0" // InstantTaskExecutorRule
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.1" //TestCoroutineDispatcher
+    testImplementation 'org.mockito:mockito-core:3.12.4'
+    testImplementation 'org.mockito:mockito-inline:3.12.4'
+    testImplementation("com.squareup.okhttp3:mockwebserver:4.9.3")
+    testImplementation("io.strikt:strikt-core:0.31.0")
+    testImplementation "com.google.truth:truth:1.0.1"
+
+    //androidTestImplementation
+    androidTestImplementation "androidx.arch.core:core-testing:2.1.0" // InstantTaskExecutorRule
+    androidTestImplementation "com.google.truth:truth:1.0.1"
+    androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.1" //TestCoroutineDispatcher
+    androidTestImplementation("com.squareup.okhttp3:mockwebserver:4.9.3")
+    androidTestImplementation("io.strikt:strikt-core:0.31.0")
+    androidTestImplementation 'com.android.support.test.espresso:espresso-contrib:3.0.2' //RecyclerViewActions
+    androidTestImplementation "com.squareup.okhttp3:mockwebserver:4.9.3"
+    androidTestImplementation "com.squareup.okhttp3:okhttp-tls:4.9.3"
+
+    // idling resource
+    implementation 'androidx.test.espresso:espresso-idling-resource:3.4.0'
+
+    debugImplementation "androidx.fragment:fragment-testing:1.5.2" //launchFragmentInContainer
+
+    // Test dependencies
+
 
 }
