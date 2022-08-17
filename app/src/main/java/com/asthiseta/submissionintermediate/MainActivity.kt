@@ -16,17 +16,13 @@ import com.asthiseta.submissionintermediate.ui.home.HomeViewModel
 
 class MainActivity : AppCompatActivity() {
     private var mainActivityMainBinding: ActivityMainBinding? = null
-    private lateinit var usrLoginPref: UserLoginPreferences
-    private lateinit var homeViewModel: HomeViewModel
-    lateinit var storyAdapter: StoryAdapter
+    lateinit var usrLoginPref: UserLoginPreferences
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mainActivityMainBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mainActivityMainBinding!!.root)
         usrLoginPref = UserLoginPreferences(this)
         supportActionBar?.hide()
-        initViewModel()
-        storyAdapter = StoryAdapter()
         checkSession()
     }
 
@@ -38,10 +34,6 @@ class MainActivity : AppCompatActivity() {
             .commit()
     }
 
-    private fun initViewModel() {
-        homeViewModel = ViewModelProvider(this)[HomeViewModel::class.java]
-
-    }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu)
@@ -60,20 +52,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun checkSession(){
         if(!usrLoginPref.getLoginData().isLogin){
-
             moveToFragment(LoginFragment())
-
         }else{
-            homeViewModel.apply {
-
-                getAllStoriesData(usrLoginPref.getLoginData().token)
-                listStoryData.observe(this@MainActivity) {
-                    if (it != null) {
-                        storyAdapter.setStoryData(it)
-                    }
-                }
-
-            }
             moveToFragment(HomeFragment())
         }
     }
