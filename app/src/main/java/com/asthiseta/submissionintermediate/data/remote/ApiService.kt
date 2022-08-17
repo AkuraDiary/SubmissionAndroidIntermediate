@@ -38,4 +38,20 @@ interface ApiService {
         @Part file: MultipartBody.Part,
         @Part("description") description: RequestBody,
     ): Call<AddStoryResponse>
+
+    @GET("stories")
+    fun getAllStoryWithLocation(
+        @Header("Authorization") auth: String,
+        @Query("location")location: Int
+    ): Call<StoryListResponse>
+
+    @Multipart
+    @POST("stories")
+    fun uploadStoryWithLocation(
+        @Header("Authorization") auth: String,
+        @Part file: MultipartBody.Part,
+        @Part("description") description: RequestBody,
+        @Part("lat")latitude: Float,
+        @Part("lon")longitude: Float
+    ): Call<AddStoryResponse>
 }
