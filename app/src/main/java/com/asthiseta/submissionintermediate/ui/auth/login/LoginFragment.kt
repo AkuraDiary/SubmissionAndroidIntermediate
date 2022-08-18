@@ -11,7 +11,7 @@ import androidx.fragment.app.viewModels
 import com.asthiseta.submissionintermediate.data.model.auth.UsrSession
 import com.asthiseta.submissionintermediate.data.preferences.DataStoreVM
 import com.asthiseta.submissionintermediate.databinding.LoginFragmentBinding
-import com.asthiseta.submissionintermediate.ui.main.MainActivity
+import com.asthiseta.submissionintermediate.ui.activities.MainActivity
 import com.asthiseta.submissionintermediate.ui.auth.AuthVM
 import com.asthiseta.submissionintermediate.ui.auth.register.RegisterFragment
 import com.asthiseta.submissionintermediate.ui.home.HomeFragment
