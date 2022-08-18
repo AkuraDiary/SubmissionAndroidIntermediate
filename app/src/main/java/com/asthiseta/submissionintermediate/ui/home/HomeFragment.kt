@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.asthiseta.submissionintermediate.ui.activities.MainActivity
@@ -14,11 +15,12 @@ import com.asthiseta.submissionintermediate.adapter.StoryAdapter
 import com.asthiseta.submissionintermediate.databinding.HomeFragmentBinding
 import com.asthiseta.submissionintermediate.ui.addStory.UploadStoryActivity
 import com.shashank.sony.fancytoastlib.FancyToast
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeFragment : Fragment() {
     private var homeBinding: HomeFragmentBinding? = null
-    private lateinit var homeViewModel: HomeViewModel
-
+    private val homeViewModel by viewModels<HomeViewModel>()
     private lateinit var storyAdapter: StoryAdapter
 
     override fun onCreateView(
@@ -46,21 +48,14 @@ class HomeFragment : Fragment() {
     }
 
     private fun initViewModel() {
-        homeViewModel = ViewModelProvider(this)[HomeViewModel::class.java]
 
         homeViewModel.isLoading.observe(viewLifecycleOwner) { showLoading(it) }
         homeViewModel.message.observe(viewLifecycleOwner) { showMessage(it) }
 
-        homeViewModel.apply {
-
-            getAllStoriesData((activity as MainActivity).usrLoginPref.getLoginData().token)
-            listStoryData.observe(requireActivity()) {
-                if (it != null) {
-                    storyAdapter.setStoryData(it)
-                }
-            }
-
+        homeViewModel.stories.observe(viewLifecycleOwner){
+            storyAdapter.submitData(lifecycle, it)
         }
+
     }
 
     private fun showMessage(message: String) {

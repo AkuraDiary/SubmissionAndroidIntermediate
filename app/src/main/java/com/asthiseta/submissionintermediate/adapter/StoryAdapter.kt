@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.util.Pair
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.asthiseta.submissionintermediate.data.model.stories.Story
@@ -13,7 +14,7 @@ import com.asthiseta.submissionintermediate.databinding.StoryLayoutBinding
 import com.asthiseta.submissionintermediate.ui.activities.DetailActivity
 import com.bumptech.glide.Glide
 
-class StoryAdapter : RecyclerView.Adapter<StoryAdapter.ViewHolder>() {
+class StoryAdapter : PagingDataAdapter<Story, StoryAdapter.ViewHolder>(StoryCallback) {
     private val listStoryData = ArrayList<Story>()
     inner class ViewHolder(private val binding: StoryLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(story: Story) {
@@ -61,12 +62,17 @@ class StoryAdapter : RecyclerView.Adapter<StoryAdapter.ViewHolder>() {
         return listStoryData.size
     }
 
-    fun setStoryData(story : ArrayList<Story>){
-        val diffCallback = StoryCallback(listStoryData, story)
-        val diffResult = DiffUtil.calculateDiff(diffCallback)
-        listStoryData.clear()
-        listStoryData.addAll(story)
-        diffResult.dispatchUpdatesTo(this)
 
+    companion object{
+        val StoryCallback = object : DiffUtil.ItemCallback<Story>() {
+            override fun areItemsTheSame(oldItem: Story, newItem: Story): Boolean {
+                return oldItem == newItem
+            }
+
+            override fun areContentsTheSame(oldItem: Story, newItem: Story): Boolean {
+                return oldItem.id == newItem.id
+            }
+
+        }
     }
 }
