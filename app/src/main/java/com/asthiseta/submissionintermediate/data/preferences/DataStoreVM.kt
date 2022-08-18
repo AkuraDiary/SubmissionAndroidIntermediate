@@ -1,5 +1,6 @@
 package com.asthiseta.submissionintermediate.data.preferences
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
@@ -17,6 +18,7 @@ class DataStoreVM @Inject constructor(private val pref: UserLoginPreferences) : 
     }
 
     fun setLoginSession(loggedUser: UsrSession){
+        Log.d("DataStoreVM", "setLoginSession: $loggedUser")
         viewModelScope.launch {
             pref.setUsrLogin(loggedUser)
         }

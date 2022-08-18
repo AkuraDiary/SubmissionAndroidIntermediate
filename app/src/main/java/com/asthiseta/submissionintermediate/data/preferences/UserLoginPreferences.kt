@@ -15,47 +15,49 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
-val  Context.datastore : DataStore<Preferences> by preferencesDataStore(name = PREF_NAME)
+val Context.datastore: DataStore<Preferences> by preferencesDataStore(name = PREF_NAME)
 
 class UserLoginPreferences @Inject constructor(@ApplicationContext val context: Context) {
     private val dataStore = context.datastore
 
-    private val pref: SharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
-    private val editor = pref.edit()
+    private val pref: SharedPreferences =
+        context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
 
-    suspend fun setUsrLogin(user: UsrSession){
+    suspend fun setUsrLogin(user: UsrSession) {
         dataStore.edit {
+            it[USER_ID_KEY] = user.userId
             it[NAME_KEY] = user.name
             it[TOKEN_KEY] = user.token
-            it[USER_ID_KEY] = user.userId
-            it[STATE_KEY]  = false
+            it[STATE_KEY] = false
         }
     }
 
 
-    suspend  fun logout(){
+    suspend fun logout() {
         dataStore.edit {
+            it[USER_ID_KEY] = ""
             it[NAME_KEY] = ""
             it[TOKEN_KEY] = ""
-            it[USER_ID_KEY] = ""
-            it[STATE_KEY]  = false
+            it[STATE_KEY] = false
         }
     }
 
     fun getLoginData(): Flow<UsrSession> {
         return dataStore.data.map {
             UsrSession(
-            it[TOKEN_KEY].toString(),
-            it[NAME_KEY].toString(),
-            it[USER_ID_KEY].toString(),
-            it[STATE_KEY] ?: false
+                it[USER_ID_KEY].toString(),
+                it[NAME_KEY].toString(),
+                it[TOKEN_KEY].toString(),
+                it[STATE_KEY] ?: false
             )
-        }}
-    companion object{
-        private  val NAME_KEY = stringPreferencesKey("NAME")
-        private  val TOKEN_KEY = stringPreferencesKey("TOKEN")
-        private  val USER_ID_KEY = stringPreferencesKey("USER_ID")
-        private  val STATE_KEY = booleanPreferencesKey("STATE")
+        }
+    }
+
+    companion object {
+        private val NAME_KEY = stringPreferencesKey("NAME")
+        private val TOKEN_KEY = stringPreferencesKey("TOKEN")
+        private val USER_ID_KEY = stringPreferencesKey("USER_ID")
+        private val STATE_KEY = booleanPreferencesKey("STATE")
 
     }
 }

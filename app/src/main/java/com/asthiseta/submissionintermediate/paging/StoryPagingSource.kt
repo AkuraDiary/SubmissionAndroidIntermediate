@@ -1,5 +1,6 @@
 package com.asthiseta.submissionintermediate.paging
 
+import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.asthiseta.submissionintermediate.data.model.stories.Story
@@ -22,9 +23,10 @@ class StoryPagingSource @Inject constructor(
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Story> {
         return try {
             val page = params.key ?: 1
-
+            val usrToken = pref.getLoginData().first().token
+            Log.d("token", usrToken)
             val response = service.getAllStory(
-                "Bearer ${pref.getLoginData().first().token}",
+                "Bearer $usrToken",
                 page,
                 params.loadSize
             )

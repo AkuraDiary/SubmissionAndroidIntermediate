@@ -1,5 +1,6 @@
 package com.asthiseta.submissionintermediate.paging
 
+import android.util.Log
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
 import androidx.paging.PagingState
@@ -46,6 +47,7 @@ class StoryRemoteMediator @Inject constructor(
 
         try {
             val token : String = pref.getLoginData().first().token
+            Log.d("token", token)
             val response = service.getAllStory("Bearer $token", page, state.config.pageSize).listStory
 
             val endPage = response.isEmpty()

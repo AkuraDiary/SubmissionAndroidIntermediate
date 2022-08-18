@@ -64,28 +64,32 @@ class LoginFragment : Fragment() {
                 if (it != null) {
                     //save the login session
                     val currentUser = UsrSession(
+                        it.userId,
                         it.name,
                         it.token,
-                        it.userId,
                         true
                     )
 
                     //save the login session
                     dataStoreVM.setLoginSession(currentUser)
 
-                    AlertDialog.Builder(requireContext()).apply {
-                        setTitle("Login Succesfully")
-                        setMessage("Logged in as ${it.name}!")
-                        setPositiveButton("Ok") { _, _ ->
-                            (activity as MainActivity).moveToFragment(HomeFragment())
-                        }
-                        create()
-                        show()
-                    }
                 }
+            }
+            AlertDialog.Builder(requireContext()).apply {
+                setTitle("Login Succesfully")
+                setMessage("Logged in as ${usrEmail}!")
+                setPositiveButton("Ok") { _, _ ->
+                    if (isAdded) {
+                        showLoading(false)
+                        (activity as MainActivity).moveToFragment(HomeFragment())
+                    }
 
+                }
+                create()
+                show()
             }
         }
+
 
     }
 
