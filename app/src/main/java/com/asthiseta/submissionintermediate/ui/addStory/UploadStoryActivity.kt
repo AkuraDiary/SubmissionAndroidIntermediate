@@ -151,10 +151,10 @@ class UploadStoryActivity : AppCompatActivity() {
                             false
                         ).show()
                     }
-                    onBackPressed()
-                }
 
+                }
             }
+            onBackPressed()
 
         } else {
             FancyToast.makeText(
