@@ -1,27 +1,24 @@
 package com.asthiseta.submissionintermediate.ui.auth.register
 
-import android.content.Context
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import com.asthiseta.submissionintermediate.BuildConfig
-import com.asthiseta.submissionintermediate.ui.activities.MainActivity
-import com.asthiseta.submissionintermediate.data.preferences.UserLoginPreferences
+import androidx.fragment.app.viewModels
+import com.asthiseta.submissionintermediate.ui.main.MainActivity
 import com.asthiseta.submissionintermediate.databinding.RegisterFragmentBinding
 import com.asthiseta.submissionintermediate.ui.auth.AuthVM
 import com.asthiseta.submissionintermediate.ui.auth.login.LoginFragment
 import com.shashank.sony.fancytoastlib.FancyToast
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class RegisterFragment : Fragment() {
     private var registerFragmentBinding: RegisterFragmentBinding? = null
-    private lateinit var authVM: AuthVM
-    private lateinit var pref: SharedPreferences
-    private lateinit var usrLoginPref: UserLoginPreferences
+    private val authVM by viewModels<AuthVM>()
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,7 +27,6 @@ class RegisterFragment : Fragment() {
     ): View {
         registerFragmentBinding = RegisterFragmentBinding.inflate(inflater, container, false)
         initVM()
-        initPref()
         return registerFragmentBinding!!.root
     }
 
@@ -40,10 +36,6 @@ class RegisterFragment : Fragment() {
         initView()
     }
 
-    private fun initPref(){
-        pref = requireContext().getSharedPreferences(BuildConfig.PREF_NAME, Context.MODE_PRIVATE)
-        usrLoginPref = UserLoginPreferences(requireContext())
-    }
 
     override fun onDetach() {
         super.onDetach()
@@ -71,17 +63,13 @@ class RegisterFragment : Fragment() {
         val usrEmail = registerFragmentBinding?.textInputTextEmail?.text.toString().trim()
         val usrPass = registerFragmentBinding?.textInputTextPass?.text.toString().trim()
 
-        authVM.apply {
-            doRegister(username, usrEmail, usrPass)
-        }
-        showLoading(false)
+        authVM.doRegister(username, usrEmail, usrPass)
 
+        (activity as MainActivity).moveToFragment(LoginFragment())
     }
 
 
     private fun initVM(){
-        authVM = ViewModelProvider(requireActivity())[AuthVM::class.java]
-
         authVM.isLoading.observe(viewLifecycleOwner){showLoading(it)}
         authVM.message.observe(viewLifecycleOwner){showMessage(it)}
     }
@@ -97,7 +85,7 @@ class RegisterFragment : Fragment() {
                 return
             }
         }
-        //doLogin
+        //doRegister
         doRegister()
 
     }

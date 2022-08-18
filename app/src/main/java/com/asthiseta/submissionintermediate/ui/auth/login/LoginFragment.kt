@@ -1,30 +1,28 @@
 package com.asthiseta.submissionintermediate.ui.auth.login
 
 import android.app.AlertDialog
-import android.content.Context
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import com.asthiseta.submissionintermediate.BuildConfig.PREF_NAME
-import com.asthiseta.submissionintermediate.ui.activities.MainActivity
+import androidx.fragment.app.viewModels
 import com.asthiseta.submissionintermediate.data.model.auth.UsrSession
-import com.asthiseta.submissionintermediate.data.preferences.UserLoginPreferences
+import com.asthiseta.submissionintermediate.data.preferences.DataStoreVM
 import com.asthiseta.submissionintermediate.databinding.LoginFragmentBinding
+import com.asthiseta.submissionintermediate.ui.main.MainActivity
 import com.asthiseta.submissionintermediate.ui.auth.AuthVM
 import com.asthiseta.submissionintermediate.ui.auth.register.RegisterFragment
 import com.asthiseta.submissionintermediate.ui.home.HomeFragment
 import com.shashank.sony.fancytoastlib.FancyToast
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class LoginFragment : Fragment() {
     private var loginFragmentBinding: LoginFragmentBinding? = null
-    private lateinit var authVM: AuthVM
-    private lateinit var pref: SharedPreferences
-    private lateinit var usrLoginPref: UserLoginPreferences
+    private val authVM by viewModels<AuthVM>()
+    private val dataStoreVM by viewModels<DataStoreVM> ()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,15 +38,8 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         (activity as MainActivity).supportActionBar?.hide()
         initVM()
-        initPref()
 
     }
-
-    private fun initPref() {
-        pref = requireContext().getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
-        usrLoginPref = UserLoginPreferences(requireContext())
-    }
-
 
     private fun initView() {
         loginFragmentBinding?.apply {
@@ -79,7 +70,9 @@ class LoginFragment : Fragment() {
                         true
                     )
 
-                    usrLoginPref.setUsrLogin(currentUser)
+                    //save the login session
+                    dataStoreVM.setLoginSession(currentUser)
+
                     AlertDialog.Builder(requireContext()).apply {
                         setTitle("Login Succesfully")
                         setMessage("Logged in as ${it.name}!")
@@ -97,8 +90,6 @@ class LoginFragment : Fragment() {
     }
 
     private fun initVM() {
-        authVM = ViewModelProvider(requireActivity())[AuthVM::class.java]
-
         authVM.isLoading.observe(viewLifecycleOwner) { showLoading(it) }
         authVM.message.observe(viewLifecycleOwner) { showMessage(it) }
     }
