@@ -18,8 +18,10 @@ import com.asthiseta.submissionintermediate.ui.activities.MainActivity
 import com.asthiseta.submissionintermediate.utilities.UploadStoryUtilities
 import com.asthiseta.submissionintermediate.utilities.UploadStoryUtilities.reduceFileImage
 import com.shashank.sony.fancytoastlib.FancyToast
+import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 
+@AndroidEntryPoint
 class UploadStoryActivity : AppCompatActivity() {
     private lateinit var binding: ActivityUploadStoryBinding
     private lateinit var currentPath: String
@@ -87,6 +89,7 @@ class UploadStoryActivity : AppCompatActivity() {
     override fun onBackPressed() {
         super.onBackPressed()
         startActivity(Intent(this, MainActivity::class.java))
+        finish()
     }
 
     private fun openGallery() {
@@ -148,6 +151,7 @@ class UploadStoryActivity : AppCompatActivity() {
                             false
                         ).show()
                     }
+                    onBackPressed()
                 }
 
             }
