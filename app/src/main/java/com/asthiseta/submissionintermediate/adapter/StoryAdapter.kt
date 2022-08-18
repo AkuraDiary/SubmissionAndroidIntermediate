@@ -15,6 +15,15 @@ import com.asthiseta.submissionintermediate.ui.activities.DetailActivity
 import com.bumptech.glide.Glide
 
 class StoryAdapter : PagingDataAdapter<Story, StoryAdapter.ViewHolder>(StoryCallback) {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val view =  StoryLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ViewHolder(view)
+    }
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        getItem(position)?.let { holder.bind(it) }
+    }
+
     private val listStoryData = ArrayList<Story>()
     inner class ViewHolder(private val binding: StoryLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(story: Story) {
@@ -49,19 +58,6 @@ class StoryAdapter : PagingDataAdapter<Story, StoryAdapter.ViewHolder>(StoryCall
 
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view =  StoryLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ViewHolder(view)
-    }
-
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(listStoryData[position])
-    }
-
-    override fun getItemCount(): Int {
-        return listStoryData.size
-    }
-
 
     companion object{
         val StoryCallback = object : DiffUtil.ItemCallback<Story>() {
@@ -75,4 +71,5 @@ class StoryAdapter : PagingDataAdapter<Story, StoryAdapter.ViewHolder>(StoryCall
 
         }
     }
+
 }

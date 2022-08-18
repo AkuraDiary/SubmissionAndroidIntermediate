@@ -75,7 +75,6 @@ class MainActivity : AppCompatActivity() {
 
             usrLogin.observe(this@MainActivity) {
                 if (it != null) {
-                    //save the login session
                     val currentUser = UsrSession(
                         it.userId,
                         it.name,
