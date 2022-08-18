@@ -13,6 +13,7 @@ import com.asthiseta.submissionintermediate.data.model.stories.Story
 import com.asthiseta.submissionintermediate.databinding.StoryLayoutBinding
 import com.asthiseta.submissionintermediate.ui.activities.DetailActivity
 import com.bumptech.glide.Glide
+import dagger.hilt.android.internal.managers.FragmentComponentManager
 
 class StoryAdapter : PagingDataAdapter<Story, StoryAdapter.ViewHolder>(StoryCallback) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -24,7 +25,7 @@ class StoryAdapter : PagingDataAdapter<Story, StoryAdapter.ViewHolder>(StoryCall
         getItem(position)?.let { holder.bind(it) }
     }
 
-    private val listStoryData = ArrayList<Story>()
+//    private val listStoryData = ArrayList<Story>()
     inner class ViewHolder(private val binding: StoryLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(story: Story) {
             binding.apply {
@@ -45,13 +46,13 @@ class StoryAdapter : PagingDataAdapter<Story, StoryAdapter.ViewHolder>(StoryCall
                     }
 
                     val optionsCompat : ActivityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(
-                        itemView.context as Activity,
+                        FragmentComponentManager.findActivity(itemView.context) as Activity,//(itemView.context as Activity),
                         Pair(storyImage, "photo"),
                         Pair(tvStoryTitle, "name"),
                         Pair(tvStoryDesc, "description")
                     )
 
-                    itemView.context.startActivity(intent, optionsCompat.toBundle())
+                    (FragmentComponentManager.findActivity(itemView.context) as Activity).startActivity(intent, optionsCompat.toBundle())
                 }
             }
         }
