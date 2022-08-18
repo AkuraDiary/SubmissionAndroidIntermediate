@@ -47,7 +47,7 @@ class StoryRemoteMediator @Inject constructor(
 
         try {
             val token : String = pref.getLoginData().first().token
-            Log.d("token", token)
+
             val response = service.getAllStory("Bearer $token", page, state.config.pageSize).listStory
 
             val endPage = response.isEmpty()

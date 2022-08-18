@@ -24,7 +24,6 @@ class StoryPagingSource @Inject constructor(
         return try {
             val page = params.key ?: 1
             val usrToken = pref.getLoginData().first().token
-            Log.d("token", usrToken)
             val response = service.getAllStory(
                 "Bearer $usrToken",
                 page,

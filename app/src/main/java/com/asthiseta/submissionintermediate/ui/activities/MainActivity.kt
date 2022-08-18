@@ -60,7 +60,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun checkSession(){
         dataStoreVM.getLoginSession().observe(this){
-            Log.d("MainActivity", it.isLogin.toString())
+
             if(!it.isLogin){
                 moveToFragment(LoginFragment())
             }else{
@@ -72,7 +72,7 @@ class MainActivity : AppCompatActivity() {
     fun saveLoginSession(email:String, pass: String){
         authVM.apply {
             doLogin(email, pass)
-            Log.d("MainActivity", usrLogin.toString())
+
             usrLogin.observe(this@MainActivity) {
                 if (it != null) {
                     //save the login session
@@ -84,9 +84,8 @@ class MainActivity : AppCompatActivity() {
                     )
 
                     //save the login session
-                    Log.d("MainActivity", currentUser.toString())
                     dataStoreVM.setLoginSession(currentUser)
-                    Log.d("MainActivity", "after dataStoreVM.setLoginSession")
+
 
                 }
             }

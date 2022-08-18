@@ -58,40 +58,6 @@ class LoginFragment : Fragment() {
         val usrEmail = loginFragmentBinding?.textInputTextEmail?.text.toString().trim()
         val usrPass = loginFragmentBinding?.textInputTextPass?.text.toString().trim()
         (activity as MainActivity).saveLoginSession(usrEmail, usrPass)
-//        authVM.apply {
-//            doLogin(usrEmail, usrPass)
-//            Log.d("MainActivity", usrLogin.toString())
-//            usrLogin.observe(viewLifecycleOwner) {
-//                if (it != null) {
-//                    //save the login session
-//                    val currentUser = UsrSession(
-//                        it.userId,
-//                        it.name,
-//                        it.token,
-//                        true
-//                    )
-//
-//                    //save the login session
-//                    Log.d("MainActivity", currentUser.toString())
-//                    dataStoreVM.setLoginSession(currentUser)
-//                    Log.d("MainActivity", "after dataStoreVM.setLoginSession")
-//
-//                }
-//            }
-//            AlertDialog.Builder(requireContext()).apply {
-//                setTitle("Login Succesfully")
-//                setMessage("Logged in as ${usrEmail}!")
-//                setPositiveButton("Ok") { _, _ ->
-//                    if (isAdded) {
-//                        showLoading(false)
-//                        (activity as MainActivity).moveToFragment(HomeFragment())
-//                    }
-//
-//                }
-//                create()
-//                show()
-//            }
-//        }
     }
 
     private fun initVM() {
@@ -118,7 +84,7 @@ class LoginFragment : Fragment() {
 
     private fun showLoading(isLoading: Boolean) {
         (activity as MainActivity).showLoading(isLoading)
-        Log.d("Login isLoading", isLoading.toString())
+
     }
 
     private fun showMessage(message: String) {
