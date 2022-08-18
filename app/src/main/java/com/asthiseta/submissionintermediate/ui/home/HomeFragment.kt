@@ -8,11 +8,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.asthiseta.submissionintermediate.ui.activities.MainActivity
 import com.asthiseta.submissionintermediate.adapter.StoryAdapter
 import com.asthiseta.submissionintermediate.databinding.HomeFragmentBinding
+import com.asthiseta.submissionintermediate.ui.activities.MainActivity
 import com.asthiseta.submissionintermediate.ui.addStory.UploadStoryActivity
 import com.shashank.sony.fancytoastlib.FancyToast
 import dagger.hilt.android.AndroidEntryPoint

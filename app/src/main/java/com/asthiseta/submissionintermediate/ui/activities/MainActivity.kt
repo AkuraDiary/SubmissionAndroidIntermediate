@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.asthiseta.submissionintermediate.R
 import com.asthiseta.submissionintermediate.data.preferences.DataStoreVM
-import com.asthiseta.submissionintermediate.data.preferences.UserLoginPreferences
 import com.asthiseta.submissionintermediate.databinding.ActivityMainBinding
 import com.asthiseta.submissionintermediate.ui.auth.login.LoginFragment
 import com.asthiseta.submissionintermediate.ui.home.HomeFragment

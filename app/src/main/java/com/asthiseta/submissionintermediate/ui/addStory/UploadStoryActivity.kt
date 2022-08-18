@@ -12,23 +12,12 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
-
-import com.asthiseta.submissionintermediate.ui.activities.MainActivity
-import com.asthiseta.submissionintermediate.data.model.stories.AddStoryResponse
 import com.asthiseta.submissionintermediate.data.preferences.DataStoreVM
-import com.asthiseta.submissionintermediate.data.preferences.UserLoginPreferences
 import com.asthiseta.submissionintermediate.databinding.ActivityUploadStoryBinding
+import com.asthiseta.submissionintermediate.ui.activities.MainActivity
 import com.asthiseta.submissionintermediate.utilities.UploadStoryUtilities
 import com.asthiseta.submissionintermediate.utilities.UploadStoryUtilities.reduceFileImage
 import com.shashank.sony.fancytoastlib.FancyToast
-import okhttp3.MediaType.Companion.toMediaType
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.MultipartBody
-import okhttp3.RequestBody.Companion.asRequestBody
-import okhttp3.RequestBody.Companion.toRequestBody
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import java.io.File
 
 class UploadStoryActivity : AppCompatActivity() {

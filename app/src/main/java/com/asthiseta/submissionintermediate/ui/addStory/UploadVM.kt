@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.asthiseta.submissionintermediate.data.repository.Repository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import retrofit2.http.Multipart
 import java.io.File
 import javax.inject.Inject
 
