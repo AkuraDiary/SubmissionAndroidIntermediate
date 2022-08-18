@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.asthiseta.submissionintermediate.adapter.StoryAdapter
 import com.asthiseta.submissionintermediate.databinding.HomeFragmentBinding
 import com.asthiseta.submissionintermediate.ui.activities.MainActivity
+import com.asthiseta.submissionintermediate.ui.activities.StoryMapsActivity
 import com.asthiseta.submissionintermediate.ui.addStory.UploadStoryActivity
 import com.shashank.sony.fancytoastlib.FancyToast
 import dagger.hilt.android.AndroidEntryPoint
@@ -85,6 +86,13 @@ class HomeFragment : Fragment() {
             fabAddStory.setOnClickListener {
 
                 val intent = Intent(requireActivity(), UploadStoryActivity::class.java)
+                startActivity(intent)
+                FragmentManager.POP_BACK_STACK_INCLUSIVE
+                requireActivity().finish()
+            }
+
+            fabToMap.setOnClickListener{
+                val intent = Intent(requireActivity(), StoryMapsActivity::class.java)
                 startActivity(intent)
                 FragmentManager.POP_BACK_STACK_INCLUSIVE
                 requireActivity().finish()
