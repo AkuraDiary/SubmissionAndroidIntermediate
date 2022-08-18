@@ -75,7 +75,6 @@ class HomeFragment : Fragment() {
 
 
     private fun initView() {
-
         homeBinding?.apply {
             rvStory.apply {
                 layoutManager = LinearLayoutManager(requireContext())

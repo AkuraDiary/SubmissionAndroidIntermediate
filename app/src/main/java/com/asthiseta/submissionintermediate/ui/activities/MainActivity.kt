@@ -1,6 +1,8 @@
 package com.asthiseta.submissionintermediate.ui.activities
 
+import android.app.AlertDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -9,8 +11,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.asthiseta.submissionintermediate.R
+import com.asthiseta.submissionintermediate.data.model.auth.UsrSession
 import com.asthiseta.submissionintermediate.data.preferences.DataStoreVM
 import com.asthiseta.submissionintermediate.databinding.ActivityMainBinding
+import com.asthiseta.submissionintermediate.ui.auth.AuthVM
 import com.asthiseta.submissionintermediate.ui.auth.login.LoginFragment
 import com.asthiseta.submissionintermediate.ui.home.HomeFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -19,6 +23,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private var mainActivityMainBinding: ActivityMainBinding? = null
     private val dataStoreVM by viewModels<DataStoreVM>()
+    private val authVM by viewModels<AuthVM>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,10 +60,44 @@ class MainActivity : AppCompatActivity() {
 
     private fun checkSession(){
         dataStoreVM.getLoginSession().observe(this){
+            Log.d("MainActivity", it.isLogin.toString())
             if(!it.isLogin){
                 moveToFragment(LoginFragment())
             }else{
                 moveToFragment(HomeFragment())
+            }
+        }
+    }
+
+    fun saveLoginSession(email:String, pass: String){
+        authVM.apply {
+            doLogin(email, pass)
+            Log.d("MainActivity", usrLogin.toString())
+            usrLogin.observe(this@MainActivity) {
+                if (it != null) {
+                    //save the login session
+                    val currentUser = UsrSession(
+                        it.userId,
+                        it.name,
+                        it.token,
+                        true
+                    )
+
+                    //save the login session
+                    Log.d("MainActivity", currentUser.toString())
+                    dataStoreVM.setLoginSession(currentUser)
+                    Log.d("MainActivity", "after dataStoreVM.setLoginSession")
+
+                }
+            }
+            AlertDialog.Builder(this@MainActivity).apply {
+                setTitle("Login Succesfully")
+                setMessage("Logged in as ${email}!")
+                setPositiveButton("Ok") { _, _ ->
+                        moveToFragment(HomeFragment())
+                }
+                create()
+                show()
             }
         }
     }

@@ -28,7 +28,7 @@ class UserLoginPreferences @Inject constructor(@ApplicationContext val context: 
             it[USER_ID_KEY] = user.userId
             it[NAME_KEY] = user.name
             it[TOKEN_KEY] = user.token
-            it[STATE_KEY] = true
+            it[STATE_KEY] = user.isLogin
         }
     }
 

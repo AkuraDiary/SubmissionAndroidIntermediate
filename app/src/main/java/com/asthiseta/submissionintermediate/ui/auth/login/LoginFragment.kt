@@ -22,7 +22,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class LoginFragment : Fragment() {
     private var loginFragmentBinding: LoginFragmentBinding? = null
     private val authVM by viewModels<AuthVM>()
-    private val dataStoreVM by viewModels<DataStoreVM> ()
+    private val dataStoreVM by viewModels<DataStoreVM>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,7 +46,6 @@ class LoginFragment : Fragment() {
             loginButton.setOnClickListener {
                 showMessage("Loging in, please wait")
                 validateAndLogin()
-
             }
             toRegister.setOnClickListener {
                 (activity as MainActivity).moveToFragment(RegisterFragment())
@@ -58,39 +57,41 @@ class LoginFragment : Fragment() {
         showLoading(true)
         val usrEmail = loginFragmentBinding?.textInputTextEmail?.text.toString().trim()
         val usrPass = loginFragmentBinding?.textInputTextPass?.text.toString().trim()
-        authVM.apply {
-            doLogin(usrEmail, usrPass)
-            usrLogin.observe(viewLifecycleOwner) {
-                if (it != null) {
-                    //save the login session
-                    val currentUser = UsrSession(
-                        it.userId,
-                        it.name,
-                        it.token,
-                        true
-                    )
-
-                    //save the login session
-                    dataStoreVM.setLoginSession(currentUser)
-
-                }
-            }
-            AlertDialog.Builder(requireContext()).apply {
-                setTitle("Login Succesfully")
-                setMessage("Logged in as ${usrEmail}!")
-                setPositiveButton("Ok") { _, _ ->
-                    if (isAdded) {
-                        showLoading(false)
-                        (activity as MainActivity).moveToFragment(HomeFragment())
-                    }
-
-                }
-                create()
-                show()
-            }
-        }
-
-
+        (activity as MainActivity).saveLoginSession(usrEmail, usrPass)
+//        authVM.apply {
+//            doLogin(usrEmail, usrPass)
+//            Log.d("MainActivity", usrLogin.toString())
+//            usrLogin.observe(viewLifecycleOwner) {
+//                if (it != null) {
+//                    //save the login session
+//                    val currentUser = UsrSession(
+//                        it.userId,
+//                        it.name,
+//                        it.token,
+//                        true
+//                    )
+//
+//                    //save the login session
+//                    Log.d("MainActivity", currentUser.toString())
+//                    dataStoreVM.setLoginSession(currentUser)
+//                    Log.d("MainActivity", "after dataStoreVM.setLoginSession")
+//
+//                }
+//            }
+//            AlertDialog.Builder(requireContext()).apply {
+//                setTitle("Login Succesfully")
+//                setMessage("Logged in as ${usrEmail}!")
+//                setPositiveButton("Ok") { _, _ ->
+//                    if (isAdded) {
+//                        showLoading(false)
+//                        (activity as MainActivity).moveToFragment(HomeFragment())
+//                    }
+//
+//                }
+//                create()
+//                show()
+//            }
+//        }
     }
 
     private fun initVM() {
