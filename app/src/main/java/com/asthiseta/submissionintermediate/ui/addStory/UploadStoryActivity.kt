@@ -60,11 +60,11 @@ class UploadStoryActivity : AppCompatActivity() {
         initView()
 
     }
-
-    private fun checkForPermission(permission: String) =
-        ContextCompat.checkSelfPermission(
-            this, permission
-        ) == PackageManager.PERMISSION_GRANTED
+//
+//    private fun checkForPermission(permission: String) =
+//        ContextCompat.checkSelfPermission(
+//            this, permission
+//        ) == PackageManager.PERMISSION_GRANTED
 
     private fun initView() {
         binding.apply {
@@ -81,31 +81,31 @@ class UploadStoryActivity : AppCompatActivity() {
 
     }
 
-    private val requestPermissionLauncher =
-        registerForActivityResult(
-            ActivityResultContracts.RequestMultiplePermissions()
-        ) { permissions ->
-            when {
-                permissions[Manifest.permission.ACCESS_FINE_LOCATION] ?: false -> {
-                    // Precise location access granted.
-                    getMyLocationToShare()
-                }
-                permissions[Manifest.permission.ACCESS_COARSE_LOCATION] ?: false -> {
-                    // Only approximate location access granted.
-                    getMyLocationToShare()
-                }
-                else -> {
-                    // No location access granted.
-                    FancyToast.makeText(
-                        this,
-                        "Location permission not granted",
-                        FancyToast.LENGTH_LONG,
-                        FancyToast.ERROR,
-                        false
-                    ).show()
-                }
-            }
-        }
+//    private val requestPermissionLauncher =
+//        registerForActivityResult(
+//            ActivityResultContracts.RequestMultiplePermissions()
+//        ) { permissions ->
+//            when {
+//                permissions[Manifest.permission.ACCESS_FINE_LOCATION] ?: false -> {
+//                    // Precise location access granted.
+//                    getMyLocationToShare()
+//                }
+//                permissions[Manifest.permission.ACCESS_COARSE_LOCATION] ?: false -> {
+//                    // Only approximate location access granted.
+//                    getMyLocationToShare()
+//                }
+//                else -> {
+//                    // No location access granted.
+//                    FancyToast.makeText(
+//                        this,
+//                        "Location permission not granted",
+//                        FancyToast.LENGTH_LONG,
+//                        FancyToast.ERROR,
+//                        false
+//                    ).show()
+//                }
+//            }
+//        }
 
     private fun isLocationEnabled(): Boolean {
         val locationManager: LocationManager =
@@ -136,89 +136,9 @@ class UploadStoryActivity : AppCompatActivity() {
         } else {
 
             val intent = Intent(this@UploadStoryActivity, StoryMapsActivity::class.java)
+            intent.putExtra("UPLOAD_REQUEST_CODE", MY_LOCATION_TO_SHARE)
             getMyLocLauncher.launch(intent)
         }
-//        val locationRequest = LocationRequest.create().apply {
-//            priority = Priority.PRIORITY_HIGH_ACCURACY
-//            maxWaitTime = 100
-//        }
-        /*
-        if (
-            checkForPermission(Manifest.permission.ACCESS_FINE_LOCATION)
-            &&
-            checkForPermission(Manifest.permission.ACCESS_COARSE_LOCATION)
-        ) {
-            if (!isLocationEnabled()) {
-                showLocationNotEnabledDialog()
-            } else {
-                fusedLocationClient.getCurrentLocation(
-                    Priority.PRIORITY_HIGH_ACCURACY,
-                    object  : CancellationToken() {
-                        override fun onCanceledRequested(onTokenCanceledListener: OnTokenCanceledListener): CancellationToken {
-                            Log.d("Cancelled", onTokenCanceledListener.toString())
-                            return this
-                        }
-
-                        override fun isCancellationRequested(): Boolean {
-                            return false
-                        }
-                    }
-                ).addOnSuccessListener {
-//                    _latitude = it?.latitude
-//                    _longitude = it?.longitude
-                    FancyToast.makeText(
-                        this,
-                        "Location found",
-                        FancyToast.LENGTH_LONG,
-                        FancyToast.SUCCESS,
-                        false
-                    ).show()
-                }.addOnFailureListener {
-                    FancyToast.makeText(
-                        this,
-                        "Location not found",
-                        FancyToast.LENGTH_LONG,
-                        FancyToast.ERROR,
-                        false
-                    ).show()
-                }.addOnCompleteListener{
-                    _latitude = it.result.latitude
-                    _longitude = it.result.longitude
-                    FancyToast.makeText(
-                        this@UploadStoryActivity,
-                        "Longitude: $_longitude\nLatitude: $_latitude",
-                        FancyToast.LENGTH_LONG,
-                        FancyToast.INFO,
-                        false
-                    ).show()
-
-                }
-//                fusedLocationClient.requestLocationUpdates(
-//                    locationRequest,
-//                    object : LocationCallback() {
-//                        override fun onLocationResult(locationResult: LocationResult) {
-//                            super.onLocationResult(locationResult)
-//                            for (location in locationResult.locations) {
-//                                Log.d("Location", "Location: $location")
-//                                _latitude = location.latitude
-//                                _longitude = location.longitude
-//
-//                            }
-//                        }
-//                    },
-//                    Looper.getMainLooper()
-//                )
-
-            }
-
-        } else {
-            requestPermissionLauncher.launch(
-                arrayOf(
-                    Manifest.permission.ACCESS_FINE_LOCATION,
-                    Manifest.permission.ACCESS_COARSE_LOCATION
-                )
-            )
-        }*/
     }
 
 
@@ -349,7 +269,6 @@ class UploadStoryActivity : AppCompatActivity() {
                     } else {
                         uploadStory("Bearer ${it.token}", file, descriptionText)
                     }
-                    //uploadStory("Bearer ${it.token}", file, descriptionText)
                     message.observe(this@UploadStoryActivity) {
                         FancyToast.makeText(
                             this@UploadStoryActivity,
@@ -377,5 +296,6 @@ class UploadStoryActivity : AppCompatActivity() {
     companion object {
         private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
         private const val REQUEST_CODE_PERMISSIONS = 10
+        const val MY_LOCATION_TO_SHARE = 11
     }
 }

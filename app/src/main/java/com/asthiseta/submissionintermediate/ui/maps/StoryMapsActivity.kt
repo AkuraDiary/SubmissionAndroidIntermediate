@@ -15,6 +15,8 @@ import com.asthiseta.submissionintermediate.R
 import com.asthiseta.submissionintermediate.data.preferences.DataStoreVM
 import com.asthiseta.submissionintermediate.databinding.ActivityStoryMapsBinding
 import com.asthiseta.submissionintermediate.ui.activities.MainActivity
+import com.asthiseta.submissionintermediate.ui.addStory.UploadStoryActivity
+import com.asthiseta.submissionintermediate.ui.addStory.UploadStoryActivity.Companion.MY_LOCATION_TO_SHARE
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
@@ -78,6 +80,10 @@ class StoryMapsActivity : AppCompatActivity(), OnMapReadyCallback {
         getMyLocation()
         showStoriesMarker()
 
+        if (intent.getIntExtra("UPLOAD_REQUEST_CODE", 0) == MY_LOCATION_TO_SHARE) {
+            getMyLatlon()
+        }
+
     }
 
     private fun setMyMapStyle() {
@@ -132,7 +138,6 @@ class StoryMapsActivity : AppCompatActivity(), OnMapReadyCallback {
             checkForPermission(Manifest.permission.ACCESS_COARSE_LOCATION)
         ) {
             mMap.isMyLocationEnabled = true
-            getMyLatlon()
 
             val fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
             fusedLocationClient.getCurrentLocation(
