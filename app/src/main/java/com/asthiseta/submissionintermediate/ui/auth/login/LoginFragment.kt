@@ -37,7 +37,7 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as MainActivity).supportActionBar?.hide()
-        initVM()
+        //initVM()
 
     }
 
@@ -60,10 +60,7 @@ class LoginFragment : Fragment() {
         (activity as MainActivity).saveLoginSession(usrEmail, usrPass)
     }
 
-    private fun initVM() {
-        authVM.isLoading.observe(viewLifecycleOwner) { showLoading(it) }
-        authVM.message.observe(viewLifecycleOwner) { showMessage(it) }
-    }
+
 
     private fun validateAndLogin() {
         when {

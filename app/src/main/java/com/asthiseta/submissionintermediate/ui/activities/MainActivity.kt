@@ -17,6 +17,7 @@ import com.asthiseta.submissionintermediate.databinding.ActivityMainBinding
 import com.asthiseta.submissionintermediate.ui.auth.AuthVM
 import com.asthiseta.submissionintermediate.ui.auth.login.LoginFragment
 import com.asthiseta.submissionintermediate.ui.home.HomeFragment
+import com.shashank.sony.fancytoastlib.FancyToast
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -31,10 +32,22 @@ class MainActivity : AppCompatActivity() {
         setContentView(mainActivityMainBinding!!.root)
 
         supportActionBar?.hide()
+        initVM()
         checkSession()
     }
 
-    fun moveToFragment(fragment: Fragment){
+
+    private fun initVM() {
+        authVM.isLoading.observe(this) { showLoading(it) }
+        authVM.message.observe(this) { showMessage(it) }
+    }
+
+    private fun showMessage(message: String?) {
+        FancyToast.makeText(this, message, FancyToast.LENGTH_SHORT, FancyToast.INFO, false)
+
+    }
+
+    fun moveToFragment(fragment: Fragment) {
         this.supportFragmentManager
             .beginTransaction()
             .replace(R.id.mainFragmentContainer, fragment)
@@ -49,30 +62,31 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when(item.itemId){
+        return when (item.itemId) {
             R.id.logoutMenu -> {
                 doLogout()
                 true
             }
-            else -> {return super.onOptionsItemSelected(item)}
+            else -> {
+                return super.onOptionsItemSelected(item)
+            }
         }
     }
 
-    private fun checkSession(){
-        dataStoreVM.getLoginSession().observe(this){
+    private fun checkSession() {
+        dataStoreVM.getLoginSession().observe(this) {
 
-            if(!it.isLogin){
+            if (!it.isLogin) {
                 moveToFragment(LoginFragment())
-            }else{
+            } else {
                 moveToFragment(HomeFragment())
             }
         }
     }
 
-    fun saveLoginSession(email:String, pass: String){
+    fun saveLoginSession(email: String, pass: String) {
         authVM.apply {
             doLogin(email, pass)
-
             usrLogin.observe(this@MainActivity) {
                 if (it != null) {
                     val currentUser = UsrSession(
@@ -85,33 +99,37 @@ class MainActivity : AppCompatActivity() {
                     //save the login session
                     dataStoreVM.setLoginSession(currentUser)
 
-
+                    AlertDialog.Builder(this@MainActivity).apply {
+                        setTitle("Login Succesfully")
+                        setMessage("Logged in as ${email}!")
+                        setPositiveButton("Ok") { _, _ ->
+                            moveToFragment(HomeFragment())
+                        }
+                        create()
+                        show()
+                    }
                 }
-            }
-            AlertDialog.Builder(this@MainActivity).apply {
-                setTitle("Login Succesfully")
-                setMessage("Logged in as ${email}!")
-                setPositiveButton("Ok") { _, _ ->
-                        moveToFragment(HomeFragment())
-                }
-                create()
-                show()
             }
         }
     }
 
-    fun showLoading(isLoading : Boolean){
-        mainActivityMainBinding?.progressBar!!.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+    fun showLoading(isLoading: Boolean) {
+        Log.d("MainActivity : ", "isLoading state : $isLoading")
+        mainActivityMainBinding?.progressBar!!.progressBar.visibility =
+            if (isLoading) View.VISIBLE else View.GONE
     }
-    fun showShimmerLoading(isLoading : Boolean){
-        mainActivityMainBinding?.progressBarShimmer?.visibility = if (isLoading) View.VISIBLE else View.GONE
+
+    fun showShimmerLoading(isLoading: Boolean) {
+        mainActivityMainBinding?.progressBarShimmer?.visibility =
+            if (isLoading) View.VISIBLE else View.GONE
     }
 
     override fun onDestroy() {
         super.onDestroy()
         mainActivityMainBinding = null
     }
-    private fun doLogout(){
+
+    private fun doLogout() {
         dataStoreVM.logout()
         moveToFragment(LoginFragment())
     }

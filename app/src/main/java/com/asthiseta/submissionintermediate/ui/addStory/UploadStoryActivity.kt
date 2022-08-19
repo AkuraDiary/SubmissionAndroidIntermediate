@@ -69,6 +69,7 @@ class UploadStoryActivity : AppCompatActivity() {
         }
     }
 
+
     private fun openCamera() {
         val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         intent.resolveActivity(packageManager)
