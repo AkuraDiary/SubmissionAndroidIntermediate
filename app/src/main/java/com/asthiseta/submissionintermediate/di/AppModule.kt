@@ -26,7 +26,7 @@ object AppModule {
             context,
             StoryDatabase::class.java,
             "story_db"
-        ).build()
+        ).fallbackToDestructiveMigration().build()
     }
 
     @Provides

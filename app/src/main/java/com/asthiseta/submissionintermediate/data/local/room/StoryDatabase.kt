@@ -6,7 +6,7 @@ import com.asthiseta.submissionintermediate.data.local.entity.RemoteKeyEntity
 import com.asthiseta.submissionintermediate.data.model.stories.Story
 
 
-@Database(entities = [Story::class, RemoteKeyEntity::class], version = 1, exportSchema = false)
+@Database(entities = [Story::class, RemoteKeyEntity::class], version = 3, exportSchema = false)
 abstract class StoryDatabase : RoomDatabase() {
     abstract fun storyDao(): StoryDao
     abstract fun remoteKeyDao(): RemoteKeyDao

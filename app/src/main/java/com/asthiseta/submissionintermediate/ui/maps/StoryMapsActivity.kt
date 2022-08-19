@@ -143,16 +143,39 @@ class StoryMapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         mapsVM.storyList.observe(this) {
             for (i in it.listIterator()) {
-                val latLng = LatLng(i.latitude, i.longitude)
-                mMap.addMarker(
-                    MarkerOptions()
-                        .position(latLng)
-                        .title(i.name)
-                        .snippet(i.description)
 
-                )
-                boundsBuilder.include(latLng)
+                val latLng = LatLng(i.lat, i.lon)
+                if (latLng.latitude != 0.0 && latLng.longitude != 0.0) {
+                    boundsBuilder.include(latLng)
+                    mMap.addMarker(
+                        MarkerOptions()
+                            .position(latLng)
+                            .title(i.name)
+                            .snippet(i.description)
+                    )
+                }
+
             }
+            try {
+                val bounds: LatLngBounds = boundsBuilder.build()
+                mMap.animateCamera(
+                    CameraUpdateFactory.newLatLngBounds(
+                        bounds,
+                        resources.displayMetrics.widthPixels,
+                        resources.displayMetrics.heightPixels,
+                        300
+                    )
+                )
+            } catch (e: Exception) {
+                FancyToast.makeText(
+                    this,
+                    e.message,
+                    FancyToast.LENGTH_LONG,
+                    FancyToast.ERROR,
+                    false
+                ).show()
+            }
+
         }
     }
 
