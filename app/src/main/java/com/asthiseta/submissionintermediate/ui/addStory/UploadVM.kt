@@ -8,13 +8,25 @@ import java.io.File
 import javax.inject.Inject
 
 @HiltViewModel
-class UploadVM @Inject constructor(private val repos : Repository): ViewModel() {
-    val message : LiveData<String> = repos.message
-    fun uploadStory(token: String, image : File, desc:String){
+class UploadVM @Inject constructor(private val repos: Repository) : ViewModel() {
+    val message: LiveData<String> = repos.message
+    fun uploadStory(token: String, image: File, desc: String) {
         repos.uploadStory(token, image, desc)
     }
 
-    fun uploadStoryWithLocation(token: String, file: File, descriptionText: String, _latitude: Double, _longitude: Double) {
-        repos.uploadStoryWithLocation(token, file, descriptionText, _latitude.toFloat(), _longitude.toFloat())
+    fun uploadStoryWithLocation(
+        token: String,
+        file: File,
+        descriptionText: String,
+        _latitude: Double,
+        _longitude: Double
+    ) {
+        repos.uploadStoryWithLocation(
+            token,
+            file,
+            descriptionText,
+            _latitude.toFloat(),
+            _longitude.toFloat()
+        )
     }
 }

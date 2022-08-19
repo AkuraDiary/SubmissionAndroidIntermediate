@@ -1,6 +1,7 @@
 package com.asthiseta.submissionintermediate.ui.maps
 
 import android.Manifest
+import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.Resources
@@ -16,6 +17,7 @@ import com.asthiseta.submissionintermediate.databinding.ActivityStoryMapsBinding
 import com.asthiseta.submissionintermediate.ui.activities.MainActivity
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import com.google.android.gms.location.Priority
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -24,6 +26,8 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.tasks.CancellationToken
+import com.google.android.gms.tasks.OnTokenCanceledListener
 import com.shashank.sony.fancytoastlib.FancyToast
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -49,6 +53,8 @@ class StoryMapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
     }
+
+
 
     override fun onBackPressed() {
         super.onBackPressed()
@@ -117,6 +123,8 @@ class StoryMapsActivity : AppCompatActivity(), OnMapReadyCallback {
             }
         }
 
+
+
     private fun getMyLocation() {
         if (
             checkForPermission(Manifest.permission.ACCESS_FINE_LOCATION)
@@ -124,6 +132,49 @@ class StoryMapsActivity : AppCompatActivity(), OnMapReadyCallback {
             checkForPermission(Manifest.permission.ACCESS_COARSE_LOCATION)
         ) {
             mMap.isMyLocationEnabled = true
+            getMyLatlon()
+
+            val fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+            fusedLocationClient.getCurrentLocation(
+                Priority.PRIORITY_HIGH_ACCURACY,
+                object  : CancellationToken() {
+                    override fun onCanceledRequested(onTokenCanceledListener: OnTokenCanceledListener): CancellationToken {
+                        Log.d("Cancelled", onTokenCanceledListener.toString())
+                        return this
+                    }
+
+                    override fun isCancellationRequested(): Boolean {
+                        return false
+                    }
+                }
+            ).addOnSuccessListener {
+                FancyToast.makeText(
+                    this,
+                    "Location found",
+                    FancyToast.LENGTH_LONG,
+                    FancyToast.SUCCESS,
+                    false
+                ).show()
+            }.addOnFailureListener {
+                FancyToast.makeText(
+                    this,
+                    "Location not found",
+                    FancyToast.LENGTH_LONG,
+                    FancyToast.ERROR,
+                    false
+                ).show()
+            }.addOnCompleteListener{
+                val _latitude = it.result.latitude
+                val _longitude = it.result.longitude
+                Log.d("Location", "$_latitude, $_longitude")
+                FancyToast.makeText(
+                    this@StoryMapsActivity,
+                    "Longitude: $_longitude\nLatitude: $_latitude",
+                    FancyToast.LENGTH_LONG,
+                    FancyToast.INFO,
+                    false
+                ).show()
+            }
 
         } else {
             requestPermissionLauncher.launch(
@@ -133,6 +184,54 @@ class StoryMapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 )
             )
         }
+    }
+
+
+    fun getMyLatlon() {
+        if (
+            checkForPermission(Manifest.permission.ACCESS_FINE_LOCATION)
+            &&
+            checkForPermission(Manifest.permission.ACCESS_COARSE_LOCATION)
+        ) {
+            val fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+            fusedLocationClient.getCurrentLocation(
+                Priority.PRIORITY_HIGH_ACCURACY,
+                object  : CancellationToken() {
+                    override fun onCanceledRequested(onTokenCanceledListener: OnTokenCanceledListener): CancellationToken {
+                        Log.d("Cancelled", onTokenCanceledListener.toString())
+                        return this
+                    }
+
+                    override fun isCancellationRequested(): Boolean {
+                        return false
+                    }
+                }
+            ).addOnCompleteListener{
+                val myLatitude = it.result.latitude
+                val myLongitude = it.result.longitude
+
+                val output = Intent()
+                output.putExtra("latitude", myLatitude)
+                output.putExtra("longitude", myLongitude)
+                setResult(Activity.RESULT_OK, output)
+                finish()
+            }
+
+        } else {
+            requestPermissionLauncher.launch(
+                arrayOf(
+                    Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+                )
+            )
+        }
+    }
+
+
+
+    override fun onActivityReenter(resultCode: Int, data: Intent?) {
+        super.onActivityReenter(resultCode, data)
+
     }
 
     private val boundsBuilder = LatLngBounds.Builder()

@@ -1,6 +1,8 @@
 package com.asthiseta.submissionintermediate.ui.addStory
 
 import android.Manifest
+import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -8,44 +10,61 @@ import android.graphics.BitmapFactory
 import android.location.Location
 import android.location.LocationManager
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
+import android.provider.Settings
+import android.util.Log
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import com.asthiseta.submissionintermediate.data.preferences.DataStoreVM
 import com.asthiseta.submissionintermediate.databinding.ActivityUploadStoryBinding
 import com.asthiseta.submissionintermediate.ui.activities.MainActivity
+import com.asthiseta.submissionintermediate.ui.maps.StoryMapsActivity
 import com.asthiseta.submissionintermediate.utilities.UploadStoryUtilities
 import com.asthiseta.submissionintermediate.utilities.UploadStoryUtilities.reduceFileImage
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationServices
+import com.google.android.gms.location.*
+import com.google.android.gms.tasks.CancellationToken
+import com.google.android.gms.tasks.OnTokenCanceledListener
 import com.shashank.sony.fancytoastlib.FancyToast
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 
 @AndroidEntryPoint
 class UploadStoryActivity : AppCompatActivity() {
+
     private lateinit var binding: ActivityUploadStoryBinding
     private lateinit var currentPath: String
+    private lateinit var locationCallback: LocationCallback
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
+
     private var getFile: File? = null
     private var location: Location? = null
-    private var _latitude : Double?= null
-    private var _longitude :Double?= null
+    private var _latitude: Double? = null
+    private var _longitude: Double? = null
+
+    //View Models
     private val dataStoreVM by viewModels<DataStoreVM>()
     private val uploadVM by viewModels<UploadVM>()
 
+    @SuppressLint("VisibleForTests")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityUploadStoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         supportActionBar?.title = "Upload Story"
         initView()
+
     }
+
+    private fun checkForPermission(permission: String) =
+        ContextCompat.checkSelfPermission(
+            this, permission
+        ) == PackageManager.PERMISSION_GRANTED
 
     private fun initView() {
         binding.apply {
@@ -55,35 +74,174 @@ class UploadStoryActivity : AppCompatActivity() {
                 uploadStory()
             }
             fabAddLocation.setOnClickListener {
-                val lm = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+                getMyLocationToShare()
 
-                if (ActivityCompat.checkSelfPermission(
-                        this@UploadStoryActivity,
-                        Manifest.permission.ACCESS_FINE_LOCATION
-                    ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                        this@UploadStoryActivity,
-                        Manifest.permission.ACCESS_COARSE_LOCATION
-                    ) != PackageManager.PERMISSION_GRANTED
-                ) {
-                    location = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                        lm.getLastKnownLocation(LocationManager.FUSED_PROVIDER)
-                    } else {
-                        lm.getLastKnownLocation(LocationManager.GPS_PROVIDER)
-                    }
+            }
+        }
+
+    }
+
+    private val requestPermissionLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.RequestMultiplePermissions()
+        ) { permissions ->
+            when {
+                permissions[Manifest.permission.ACCESS_FINE_LOCATION] ?: false -> {
+                    // Precise location access granted.
+                    getMyLocationToShare()
                 }
-                 _longitude= location?.longitude ?: 0.0
-                 _latitude = location?.latitude ?: 0.0
+                permissions[Manifest.permission.ACCESS_COARSE_LOCATION] ?: false -> {
+                    // Only approximate location access granted.
+                    getMyLocationToShare()
+                }
+                else -> {
+                    // No location access granted.
+                    FancyToast.makeText(
+                        this,
+                        "Location permission not granted",
+                        FancyToast.LENGTH_LONG,
+                        FancyToast.ERROR,
+                        false
+                    ).show()
+                }
+            }
+        }
 
+    private fun isLocationEnabled(): Boolean {
+        val locationManager: LocationManager =
+            this.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
+                || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
+    }
+
+    private val getMyLocLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+        if (it.resultCode == RESULT_OK) {
+            val lat = it.data?.getDoubleExtra("latitude", 0.0)
+            val lng = it.data?.getDoubleExtra("longitude", 0.0)
+            _latitude = lat
+            _longitude = lng
+            Log.d("Location", "$_latitude, $_longitude")
+            FancyToast.makeText(
+                this@UploadStoryActivity,
+                "Longitude: $_longitude\nLatitude: $_latitude",
+                FancyToast.LENGTH_LONG,
+                FancyToast.INFO,
+                false
+            ).show()
+        }
+    }
+    private fun getMyLocationToShare() {
+        if (!isLocationEnabled()) {
+            showLocationNotEnabledDialog()
+        } else {
+
+            val intent = Intent(this@UploadStoryActivity, StoryMapsActivity::class.java)
+            getMyLocLauncher.launch(intent)
+        }
+//        val locationRequest = LocationRequest.create().apply {
+//            priority = Priority.PRIORITY_HIGH_ACCURACY
+//            maxWaitTime = 100
+//        }
+        /*
+        if (
+            checkForPermission(Manifest.permission.ACCESS_FINE_LOCATION)
+            &&
+            checkForPermission(Manifest.permission.ACCESS_COARSE_LOCATION)
+        ) {
+            if (!isLocationEnabled()) {
+                showLocationNotEnabledDialog()
+            } else {
+                fusedLocationClient.getCurrentLocation(
+                    Priority.PRIORITY_HIGH_ACCURACY,
+                    object  : CancellationToken() {
+                        override fun onCanceledRequested(onTokenCanceledListener: OnTokenCanceledListener): CancellationToken {
+                            Log.d("Cancelled", onTokenCanceledListener.toString())
+                            return this
+                        }
+
+                        override fun isCancellationRequested(): Boolean {
+                            return false
+                        }
+                    }
+                ).addOnSuccessListener {
+//                    _latitude = it?.latitude
+//                    _longitude = it?.longitude
+                    FancyToast.makeText(
+                        this,
+                        "Location found",
+                        FancyToast.LENGTH_LONG,
+                        FancyToast.SUCCESS,
+                        false
+                    ).show()
+                }.addOnFailureListener {
+                    FancyToast.makeText(
+                        this,
+                        "Location not found",
+                        FancyToast.LENGTH_LONG,
+                        FancyToast.ERROR,
+                        false
+                    ).show()
+                }.addOnCompleteListener{
+                    _latitude = it.result.latitude
+                    _longitude = it.result.longitude
+                    FancyToast.makeText(
+                        this@UploadStoryActivity,
+                        "Longitude: $_longitude\nLatitude: $_latitude",
+                        FancyToast.LENGTH_LONG,
+                        FancyToast.INFO,
+                        false
+                    ).show()
+
+                }
+//                fusedLocationClient.requestLocationUpdates(
+//                    locationRequest,
+//                    object : LocationCallback() {
+//                        override fun onLocationResult(locationResult: LocationResult) {
+//                            super.onLocationResult(locationResult)
+//                            for (location in locationResult.locations) {
+//                                Log.d("Location", "Location: $location")
+//                                _latitude = location.latitude
+//                                _longitude = location.longitude
+//
+//                            }
+//                        }
+//                    },
+//                    Looper.getMainLooper()
+//                )
+
+            }
+
+        } else {
+            requestPermissionLauncher.launch(
+                arrayOf(
+                    Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+                )
+            )
+        }*/
+    }
+
+
+    private fun showLocationNotEnabledDialog() {
+        AlertDialog.Builder(this@UploadStoryActivity).apply {
+            setTitle("Enable Location")
+            setMessage("Please Enable Location To Share Your Location")
+            setPositiveButton("Ok") { _, _ ->
+                val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+                startActivity(intent)
+            }
+            setNegativeButton("Cancel") { _, _ ->
                 FancyToast.makeText(
                     this@UploadStoryActivity,
-                    "Longitude: $_longitude\nLatitude: $_latitude",
+                    "Location is not enabled",
                     FancyToast.LENGTH_LONG,
                     FancyToast.INFO,
                     false
                 ).show()
             }
+            create()
+            show()
         }
-
     }
 
     override fun onRequestPermissionsResult(
@@ -178,9 +336,16 @@ class UploadStoryActivity : AppCompatActivity() {
             val file = reduceFileImage(getFile as File)
             val descriptionText = binding.editTextAddDescription.text.toString()
             dataStoreVM.getLoginSession().observe(this) {
+
                 uploadVM.apply {
                     if (_latitude != null && _longitude != null) {
-                        uploadStoryWithLocation("Bearer ${it.token}", file, descriptionText, _latitude!!, _longitude!!)
+                        uploadStoryWithLocation(
+                            "Bearer ${it.token}",
+                            file,
+                            descriptionText,
+                            _latitude!!,
+                            _longitude!!
+                        )
                     } else {
                         uploadStory("Bearer ${it.token}", file, descriptionText)
                     }
