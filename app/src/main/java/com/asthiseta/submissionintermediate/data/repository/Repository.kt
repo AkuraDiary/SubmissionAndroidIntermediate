@@ -114,15 +114,22 @@ class Repository @Inject constructor(
 
     fun uploadStoryWithLocation(
         token: String,
-        imageMultipartBody: MultipartBody.Part,
-        storyDesc: RequestBody,
+        picture: File,
+        storyDesc: String,
         usrLat: Float,
         usrLong: Float
     ) {
+        val description = storyDesc.toRequestBody("text/plain".toMediaType())
+        val pictureFile = picture.asRequestBody("image/jpeg".toMediaTypeOrNull())
+        val imageMultipart: MultipartBody.Part = MultipartBody.Part.createFormData(
+            "photo",
+            picture.name,
+            pictureFile
+        )
         service.uploadStoryWithLocation(
             token,
-            imageMultipartBody,
-            storyDesc,
+            imageMultipart,
+            description,
             usrLat,
             usrLong
         ).enqueue(object : Callback<AddStoryResponse> {

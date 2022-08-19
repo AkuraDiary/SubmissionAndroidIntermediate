@@ -1,15 +1,20 @@
 package com.asthiseta.submissionintermediate.ui.addStory
 
 import android.Manifest
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
+import android.location.Location
+import android.location.LocationManager
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import com.asthiseta.submissionintermediate.data.preferences.DataStoreVM
@@ -17,6 +22,8 @@ import com.asthiseta.submissionintermediate.databinding.ActivityUploadStoryBindi
 import com.asthiseta.submissionintermediate.ui.activities.MainActivity
 import com.asthiseta.submissionintermediate.utilities.UploadStoryUtilities
 import com.asthiseta.submissionintermediate.utilities.UploadStoryUtilities.reduceFileImage
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.shashank.sony.fancytoastlib.FancyToast
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
@@ -26,6 +33,9 @@ class UploadStoryActivity : AppCompatActivity() {
     private lateinit var binding: ActivityUploadStoryBinding
     private lateinit var currentPath: String
     private var getFile: File? = null
+    private var location: Location? = null
+    private var _latitude : Double?= null
+    private var _longitude :Double?= null
     private val dataStoreVM by viewModels<DataStoreVM>()
     private val uploadVM by viewModels<UploadVM>()
 
@@ -35,7 +45,6 @@ class UploadStoryActivity : AppCompatActivity() {
         setContentView(binding.root)
         supportActionBar?.title = "Upload Story"
         initView()
-
     }
 
     private fun initView() {
@@ -44,6 +53,34 @@ class UploadStoryActivity : AppCompatActivity() {
             btnOpenGallery.setOnClickListener { openGallery() }
             btnUpload.setOnClickListener {
                 uploadStory()
+            }
+            fabAddLocation.setOnClickListener {
+                val lm = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+
+                if (ActivityCompat.checkSelfPermission(
+                        this@UploadStoryActivity,
+                        Manifest.permission.ACCESS_FINE_LOCATION
+                    ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                        this@UploadStoryActivity,
+                        Manifest.permission.ACCESS_COARSE_LOCATION
+                    ) != PackageManager.PERMISSION_GRANTED
+                ) {
+                    location = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                        lm.getLastKnownLocation(LocationManager.FUSED_PROVIDER)
+                    } else {
+                        lm.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+                    }
+                }
+                 _longitude= location?.longitude ?: 0.0
+                 _latitude = location?.latitude ?: 0.0
+
+                FancyToast.makeText(
+                    this@UploadStoryActivity,
+                    "Longitude: $_longitude\nLatitude: $_latitude",
+                    FancyToast.LENGTH_LONG,
+                    FancyToast.INFO,
+                    false
+                ).show()
             }
         }
 
@@ -140,10 +177,15 @@ class UploadStoryActivity : AppCompatActivity() {
         if (getFile != null) {
             val file = reduceFileImage(getFile as File)
             val descriptionText = binding.editTextAddDescription.text.toString()
-            dataStoreVM.getLoginSession().observe(this){
+            dataStoreVM.getLoginSession().observe(this) {
                 uploadVM.apply {
-                    uploadStory("Bearer ${it.token}", file, descriptionText)
-                    message.observe(this@UploadStoryActivity){
+                    if (_latitude != null && _longitude != null) {
+                        uploadStoryWithLocation("Bearer ${it.token}", file, descriptionText, _latitude!!, _longitude!!)
+                    } else {
+                        uploadStory("Bearer ${it.token}", file, descriptionText)
+                    }
+                    //uploadStory("Bearer ${it.token}", file, descriptionText)
+                    message.observe(this@UploadStoryActivity) {
                         FancyToast.makeText(
                             this@UploadStoryActivity,
                             it,

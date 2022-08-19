@@ -70,6 +70,7 @@ class StoryMapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         setMyMapStyle()
         getMyLocation()
+        showStoriesMarker()
 
     }
 
@@ -123,7 +124,7 @@ class StoryMapsActivity : AppCompatActivity(), OnMapReadyCallback {
             checkForPermission(Manifest.permission.ACCESS_COARSE_LOCATION)
         ) {
             mMap.isMyLocationEnabled = true
-            showStoriesMarker()
+
         } else {
             requestPermissionLauncher.launch(
                 arrayOf(
