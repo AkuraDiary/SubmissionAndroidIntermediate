@@ -170,8 +170,8 @@ class Repository @Inject constructor(
                     }
 
                 })
-            _isLoading.value  = false
         }
+        _isLoading.value  = false
     }
 
     fun doRegisterUser(usrName: String, usrEmail:String, usrPass:String){
@@ -193,9 +193,8 @@ class Repository @Inject constructor(
                     }
 
                 })
-            _isLoading.value = false
-
         }
+        _isLoading.value = false
     }
 
 }

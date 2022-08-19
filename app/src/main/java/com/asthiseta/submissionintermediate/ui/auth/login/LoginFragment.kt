@@ -1,28 +1,24 @@
 package com.asthiseta.submissionintermediate.ui.auth.login
 
-import android.app.AlertDialog
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.asthiseta.submissionintermediate.data.model.auth.UsrSession
 import com.asthiseta.submissionintermediate.data.preferences.DataStoreVM
 import com.asthiseta.submissionintermediate.databinding.LoginFragmentBinding
 import com.asthiseta.submissionintermediate.ui.activities.MainActivity
 import com.asthiseta.submissionintermediate.ui.auth.AuthVM
 import com.asthiseta.submissionintermediate.ui.auth.register.RegisterFragment
-import com.asthiseta.submissionintermediate.ui.home.HomeFragment
 import com.shashank.sony.fancytoastlib.FancyToast
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class LoginFragment : Fragment() {
     private var loginFragmentBinding: LoginFragmentBinding? = null
-    private val authVM by viewModels<AuthVM>()
-    private val dataStoreVM by viewModels<DataStoreVM>()
+//    private val authVM by viewModels<AuthVM>()
+//    private val dataStoreVM by viewModels<DataStoreVM>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,8 +33,6 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as MainActivity).supportActionBar?.hide()
-        //initVM()
-
     }
 
     private fun initView() {
@@ -54,7 +48,6 @@ class LoginFragment : Fragment() {
     }
 
     private fun doLogin() {
-        showLoading(true)
         val usrEmail = loginFragmentBinding?.textInputTextEmail?.text.toString().trim()
         val usrPass = loginFragmentBinding?.textInputTextPass?.text.toString().trim()
         (activity as MainActivity).saveLoginSession(usrEmail, usrPass)
@@ -79,10 +72,6 @@ class LoginFragment : Fragment() {
 
     }
 
-    private fun showLoading(isLoading: Boolean) {
-        (activity as MainActivity).showLoading(isLoading)
-
-    }
 
     private fun showMessage(message: String) {
         FancyToast.makeText(

@@ -26,7 +26,6 @@ class RegisterFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         registerFragmentBinding = RegisterFragmentBinding.inflate(inflater, container, false)
-        initVM()
         return registerFragmentBinding!!.root
     }
 
@@ -58,7 +57,6 @@ class RegisterFragment : Fragment() {
     }
 
     private fun doRegister(){
-        showLoading(true)
         val username = registerFragmentBinding?.textInputTextUsername?.text.toString().trim()
         val usrEmail = registerFragmentBinding?.textInputTextEmail?.text.toString().trim()
         val usrPass = registerFragmentBinding?.textInputTextPass?.text.toString().trim()
@@ -66,12 +64,6 @@ class RegisterFragment : Fragment() {
         authVM.doRegister(username, usrEmail, usrPass)
 
         (activity as MainActivity).moveToFragment(LoginFragment())
-    }
-
-
-    private fun initVM(){
-        authVM.isLoading.observe(viewLifecycleOwner){showLoading(it)}
-        authVM.message.observe(viewLifecycleOwner){showMessage(it)}
     }
 
     private fun validateAndRegister() {
@@ -88,10 +80,6 @@ class RegisterFragment : Fragment() {
         //doRegister
         doRegister()
 
-    }
-
-    private fun showLoading(isLoading : Boolean){
-        (activity as MainActivity).showLoading(isLoading)
     }
 
     private fun showMessage(message: String){
