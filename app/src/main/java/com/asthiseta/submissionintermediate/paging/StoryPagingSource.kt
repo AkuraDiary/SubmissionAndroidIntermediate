@@ -1,6 +1,5 @@
 package com.asthiseta.submissionintermediate.paging
 
-import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.asthiseta.submissionintermediate.data.model.stories.Story

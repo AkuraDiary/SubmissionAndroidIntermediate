@@ -1,6 +1,5 @@
 package com.asthiseta.submissionintermediate.data.preferences
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData

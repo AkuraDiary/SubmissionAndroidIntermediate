@@ -5,11 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import com.asthiseta.submissionintermediate.data.preferences.DataStoreVM
 import com.asthiseta.submissionintermediate.databinding.LoginFragmentBinding
 import com.asthiseta.submissionintermediate.ui.activities.MainActivity
-import com.asthiseta.submissionintermediate.ui.auth.AuthVM
 import com.asthiseta.submissionintermediate.ui.auth.register.RegisterFragment
 import com.shashank.sony.fancytoastlib.FancyToast
 import dagger.hilt.android.AndroidEntryPoint

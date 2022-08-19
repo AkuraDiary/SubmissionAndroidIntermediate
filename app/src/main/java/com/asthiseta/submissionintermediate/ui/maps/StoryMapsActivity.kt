@@ -5,17 +5,16 @@ import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.Resources
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.asthiseta.submissionintermediate.R
 import com.asthiseta.submissionintermediate.data.preferences.DataStoreVM
 import com.asthiseta.submissionintermediate.databinding.ActivityStoryMapsBinding
 import com.asthiseta.submissionintermediate.ui.activities.MainActivity
-import com.asthiseta.submissionintermediate.ui.addStory.UploadStoryActivity
 import com.asthiseta.submissionintermediate.ui.addStory.UploadStoryActivity.Companion.MY_LOCATION_TO_SHARE
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -170,12 +169,12 @@ class StoryMapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     false
                 ).show()
             }.addOnCompleteListener{
-                val _latitude = it.result.latitude
-                val _longitude = it.result.longitude
-                Log.d("Location", "$_latitude, $_longitude")
+                val myLatitude = it.result.latitude
+                val myLongitude = it.result.longitude
+                Log.d("Location", "$myLatitude, $myLongitude")
                 FancyToast.makeText(
                     this@StoryMapsActivity,
-                    "Longitude: $_longitude\nLatitude: $_latitude",
+                    "Longitude: $myLongitude\nLatitude: $myLatitude",
                     FancyToast.LENGTH_LONG,
                     FancyToast.INFO,
                     false

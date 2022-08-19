@@ -2,7 +2,6 @@ package com.asthiseta.submissionintermediate.ui.addStory
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -26,9 +25,9 @@ import com.asthiseta.submissionintermediate.ui.activities.MainActivity
 import com.asthiseta.submissionintermediate.ui.maps.StoryMapsActivity
 import com.asthiseta.submissionintermediate.utilities.UploadStoryUtilities
 import com.asthiseta.submissionintermediate.utilities.UploadStoryUtilities.reduceFileImage
-import com.google.android.gms.location.*
-import com.google.android.gms.tasks.CancellationToken
-import com.google.android.gms.tasks.OnTokenCanceledListener
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationCallback
+import com.google.android.gms.location.LocationServices
 import com.shashank.sony.fancytoastlib.FancyToast
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
