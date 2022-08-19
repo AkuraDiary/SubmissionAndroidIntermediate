@@ -192,7 +192,7 @@ class StoryMapsActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
 
-    fun getMyLatlon() {
+    private fun getMyLatlon() {
         if (
             checkForPermission(Manifest.permission.ACCESS_FINE_LOCATION)
             &&

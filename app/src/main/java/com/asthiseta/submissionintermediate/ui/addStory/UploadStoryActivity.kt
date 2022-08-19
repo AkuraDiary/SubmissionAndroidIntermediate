@@ -37,11 +37,9 @@ class UploadStoryActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityUploadStoryBinding
     private lateinit var currentPath: String
-    private lateinit var locationCallback: LocationCallback
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
     private var getFile: File? = null
-    private var location: Location? = null
     private var _latitude: Double? = null
     private var _longitude: Double? = null
 
