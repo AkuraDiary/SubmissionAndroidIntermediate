@@ -26,4 +26,5 @@
     <string name="txt_rto">Request Timed Out</string>
     <string name="txt_retry">Retry</string>
     <string name="title_activity_story_maps">StoryMapsActivity</string>
+    <string name="txt_add_location">Add Location</string>
 </resources>
