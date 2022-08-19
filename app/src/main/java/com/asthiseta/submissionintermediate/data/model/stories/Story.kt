@@ -9,5 +9,7 @@ data class Story(
     val description: String,
     @PrimaryKey val id: String,
     val name: String,
-    val photoUrl: String
+    val photoUrl: String,
+    val latitude: Double,
+    val longitude: Double,
 )

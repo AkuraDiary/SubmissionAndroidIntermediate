@@ -55,7 +55,7 @@
             android:value="AIzaSyDDXlrQs3my515kXO7UChnF2euBCLsy0GI" />
 
         <activity
-            android:name=".ui.activities.StoryMapsActivity"
+            android:name=".ui.maps.StoryMapsActivity"
             android:exported="false"
             android:label="@string/title_activity_story_maps" />
 
