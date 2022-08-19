@@ -82,6 +82,7 @@ class StoryMapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         if (intent.getIntExtra("UPLOAD_REQUEST_CODE", 0) == MY_LOCATION_TO_SHARE) {
             getMyLatlon()
+            intent.removeExtra("UPLOAD_REQUEST_CODE")
         }
 
     }
