@@ -139,47 +139,6 @@ class StoryMapsActivity : AppCompatActivity(), OnMapReadyCallback {
         ) {
             mMap.isMyLocationEnabled = true
 
-            val fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
-            fusedLocationClient.getCurrentLocation(
-                Priority.PRIORITY_HIGH_ACCURACY,
-                object  : CancellationToken() {
-                    override fun onCanceledRequested(onTokenCanceledListener: OnTokenCanceledListener): CancellationToken {
-                        Log.d("Cancelled", onTokenCanceledListener.toString())
-                        return this
-                    }
-
-                    override fun isCancellationRequested(): Boolean {
-                        return false
-                    }
-                }
-            ).addOnSuccessListener {
-                FancyToast.makeText(
-                    this,
-                    "Location found",
-                    FancyToast.LENGTH_LONG,
-                    FancyToast.SUCCESS,
-                    false
-                ).show()
-            }.addOnFailureListener {
-                FancyToast.makeText(
-                    this,
-                    "Location not found",
-                    FancyToast.LENGTH_LONG,
-                    FancyToast.ERROR,
-                    false
-                ).show()
-            }.addOnCompleteListener{
-                val myLatitude = it.result.latitude
-                val myLongitude = it.result.longitude
-                Log.d("Location", "$myLatitude, $myLongitude")
-                FancyToast.makeText(
-                    this@StoryMapsActivity,
-                    "Longitude: $myLongitude\nLatitude: $myLatitude",
-                    FancyToast.LENGTH_LONG,
-                    FancyToast.INFO,
-                    false
-                ).show()
-            }
 
         } else {
             requestPermissionLauncher.launch(

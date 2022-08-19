@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.asthiseta.submissionintermediate.adapter.StoryAdapter
 import com.asthiseta.submissionintermediate.databinding.HomeFragmentBinding
+import com.asthiseta.submissionintermediate.paging.LoadingStateAdapter
 import com.asthiseta.submissionintermediate.ui.activities.MainActivity
 import com.asthiseta.submissionintermediate.ui.maps.StoryMapsActivity
 import com.asthiseta.submissionintermediate.ui.addStory.UploadStoryActivity
@@ -80,7 +81,11 @@ class HomeFragment : Fragment() {
             rvStory.apply {
                 layoutManager = LinearLayoutManager(requireContext())
                 setHasFixedSize(true)
-                adapter = storyAdapter
+                adapter = storyAdapter.withLoadStateFooter(
+                    footer = LoadingStateAdapter {
+                        storyAdapter.retry()
+                    }
+                )
             }
 
             fabAddStory.setOnClickListener {
