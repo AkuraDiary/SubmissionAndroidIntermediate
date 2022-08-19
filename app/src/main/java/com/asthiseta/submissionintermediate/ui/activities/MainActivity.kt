@@ -120,6 +120,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun showShimmerLoading(isLoading: Boolean) {
+        Log.d("MainActivity Shimmer Loading: ", "isLoading state : $isLoading")
         mainActivityMainBinding?.progressBarShimmer?.visibility =
             if (isLoading) View.VISIBLE else View.GONE
     }

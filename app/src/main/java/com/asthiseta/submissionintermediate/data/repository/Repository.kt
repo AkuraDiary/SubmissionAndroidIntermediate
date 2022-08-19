@@ -149,7 +149,7 @@ class Repository @Inject constructor(
 
     fun  doLoginUser(usrEmail: String, usrPass: String){
         wrapWithEspressoIdlingResource {
-            _isLoading.value  = false
+            _isLoading.value  = true
             service.userLogin(usrEmail, usrPass)
                 .enqueue(object : Callback<UserLoginResponse>{
                     override fun onResponse(
