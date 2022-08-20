@@ -86,6 +86,7 @@ class MainActivity : AppCompatActivity() {
 
     fun saveLoginSession(email: String, pass: String) {
         authVM.apply {
+            showLoading(true)
             doLogin(email, pass)
             usrLogin.observe(this@MainActivity) {
                 if (it != null) {
@@ -95,20 +96,19 @@ class MainActivity : AppCompatActivity() {
                         it.token,
                         true
                     )
-
                     //save the login session
                     dataStoreVM.setLoginSession(currentUser)
-
-                    AlertDialog.Builder(this@MainActivity).apply {
-                        setTitle("Login Succesfully")
-                        setMessage("Logged in as ${email}!")
-                        setPositiveButton("Ok") { _, _ ->
-                            moveToFragment(HomeFragment())
-                        }
-                        create()
-                        show()
-                    }
                 }
+                showLoading(false)
+//                AlertDialog.Builder(this@MainActivity).apply {
+//                    setTitle("Login Succesfully")
+//                    setMessage("Logged in as ${email}!")
+//                    setPositiveButton("Ok") { _, _ ->
+//                       // moveToFragment(HomeFragment())
+//                    }
+//                    create()
+//                    show()
+//                }
             }
         }
     }

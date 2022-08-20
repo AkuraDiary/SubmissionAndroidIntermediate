@@ -55,11 +55,6 @@ class UploadStoryActivity : AppCompatActivity() {
         initView()
 
     }
-//
-//    private fun checkForPermission(permission: String) =
-//        ContextCompat.checkSelfPermission(
-//            this, permission
-//        ) == PackageManager.PERMISSION_GRANTED
 
     private fun initView() {
         binding.apply {
@@ -75,32 +70,6 @@ class UploadStoryActivity : AppCompatActivity() {
         }
 
     }
-
-//    private val requestPermissionLauncher =
-//        registerForActivityResult(
-//            ActivityResultContracts.RequestMultiplePermissions()
-//        ) { permissions ->
-//            when {
-//                permissions[Manifest.permission.ACCESS_FINE_LOCATION] ?: false -> {
-//                    // Precise location access granted.
-//                    getMyLocationToShare()
-//                }
-//                permissions[Manifest.permission.ACCESS_COARSE_LOCATION] ?: false -> {
-//                    // Only approximate location access granted.
-//                    getMyLocationToShare()
-//                }
-//                else -> {
-//                    // No location access granted.
-//                    FancyToast.makeText(
-//                        this,
-//                        "Location permission not granted",
-//                        FancyToast.LENGTH_LONG,
-//                        FancyToast.ERROR,
-//                        false
-//                    ).show()
-//                }
-//            }
-//        }
 
     private fun isLocationEnabled(): Boolean {
         val locationManager: LocationManager =

@@ -19,9 +19,6 @@ val Context.datastore: DataStore<Preferences> by preferencesDataStore(name = PRE
 class UserLoginPreferences @Inject constructor(@ApplicationContext val context: Context) {
     private val dataStore = context.datastore
 
-//    private val pref: SharedPreferences =
-//        context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
-
     suspend fun setUsrLogin(user: UsrSession) {
         dataStore.edit {
             it[USER_ID_KEY] = user.userId

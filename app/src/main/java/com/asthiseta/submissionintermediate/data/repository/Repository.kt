@@ -168,16 +168,16 @@ class Repository @Inject constructor(
                         }else{
                             _message.value = response.message()
                         }
-
+                        _isLoading.value  = false
                     }
 
                     override fun onFailure(call: Call<UserLoginResponse>, t: Throwable) {
                         _message.value = t.message
+                        _isLoading.value  = false
                     }
 
                 })
         }
-        _isLoading.value  = false
     }
 
     fun doRegisterUser(usrName: String, usrEmail:String, usrPass:String){
@@ -191,16 +191,18 @@ class Repository @Inject constructor(
                     ) {
                         if(response.isSuccessful){
                             _message.value = response.message()
+                            _isLoading.value = false
                         }
                     }
 
                     override fun onFailure(call: Call<UserRegisterResponse>, t: Throwable) {
                         _message.value = t.message
+                        _isLoading.value = false
                     }
 
                 })
+
         }
-        _isLoading.value = false
     }
 
 }

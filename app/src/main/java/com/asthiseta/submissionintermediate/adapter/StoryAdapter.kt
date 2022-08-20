@@ -25,7 +25,6 @@ class StoryAdapter : PagingDataAdapter<Story, StoryAdapter.ViewHolder>(StoryCall
         getItem(position)?.let { holder.bind(it) }
     }
 
-//    private val listStoryData = ArrayList<Story>()
     inner class ViewHolder(private val binding: StoryLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(story: Story) {
             binding.apply {
