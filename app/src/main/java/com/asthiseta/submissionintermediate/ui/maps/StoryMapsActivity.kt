@@ -47,7 +47,7 @@ class StoryMapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         binding = ActivityStoryMapsBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        supportActionBar?.title = "Story Maps"
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
