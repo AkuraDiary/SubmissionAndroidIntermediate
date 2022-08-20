@@ -100,15 +100,7 @@ class MainActivity : AppCompatActivity() {
                     dataStoreVM.setLoginSession(currentUser)
                 }
                 showLoading(false)
-//                AlertDialog.Builder(this@MainActivity).apply {
-//                    setTitle("Login Succesfully")
-//                    setMessage("Logged in as ${email}!")
-//                    setPositiveButton("Ok") { _, _ ->
-//                       // moveToFragment(HomeFragment())
-//                    }
-//                    create()
-//                    show()
-//                }
+
             }
         }
     }

@@ -7,6 +7,7 @@ import android.content.pm.PackageManager
 import android.content.res.Resources
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -157,6 +158,8 @@ class StoryMapsActivity : AppCompatActivity(), OnMapReadyCallback {
             &&
             checkForPermission(Manifest.permission.ACCESS_COARSE_LOCATION)
         ) {
+            binding.progressBar.progressBar.visibility = View.VISIBLE //show loading
+
             val fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
             fusedLocationClient.getCurrentLocation(
                 Priority.PRIORITY_HIGH_ACCURACY,
@@ -177,6 +180,8 @@ class StoryMapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 val output = Intent()
                 output.putExtra("latitude", myLatitude)
                 output.putExtra("longitude", myLongitude)
+
+                binding.progressBar.progressBar.visibility = View.VISIBLE //hide loading
                 setResult(Activity.RESULT_OK, output)
                 finish()
             }

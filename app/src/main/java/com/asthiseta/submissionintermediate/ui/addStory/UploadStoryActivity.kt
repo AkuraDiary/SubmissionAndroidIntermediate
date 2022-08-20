@@ -84,12 +84,11 @@ class UploadStoryActivity : AppCompatActivity() {
             val lng = it.data?.getDoubleExtra("longitude", 0.0)
             _latitude = lat
             _longitude = lng
-            Log.d("Location", "$_latitude, $_longitude")
             FancyToast.makeText(
                 this@UploadStoryActivity,
-                "Longitude: $_longitude\nLatitude: $_latitude",
+                "Location Added",
                 FancyToast.LENGTH_LONG,
-                FancyToast.INFO,
+                FancyToast.SUCCESS,
                 false
             ).show()
         }
@@ -98,7 +97,13 @@ class UploadStoryActivity : AppCompatActivity() {
         if (!isLocationEnabled()) {
             showLocationNotEnabledDialog()
         } else {
-
+            FancyToast.makeText(
+                this@UploadStoryActivity,
+                "Getting your location, please wait",
+                FancyToast.LENGTH_LONG,
+                FancyToast.INFO,
+                false
+            ).show()
             val intent = Intent(this@UploadStoryActivity, StoryMapsActivity::class.java)
             intent.putExtra("UPLOAD_REQUEST_CODE", MY_LOCATION_TO_SHARE)
             getMyLocLauncher.launch(intent)

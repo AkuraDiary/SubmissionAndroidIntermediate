@@ -47,7 +47,7 @@ class Repository @Inject constructor(
     fun getStoriesData(): LiveData<PagingData<Story>> {
         return Pager(
             config = PagingConfig(
-                pageSize = 5
+                pageSize = 3
             ),
             remoteMediator = StoryRemoteMediator(storyDatabase, service, pref),
             pagingSourceFactory = {
