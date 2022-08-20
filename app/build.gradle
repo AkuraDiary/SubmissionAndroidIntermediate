@@ -67,6 +67,8 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4" //TestCoroutineDispatcher
+
     //Datastore
     implementation "androidx.datastore:datastore-preferences:1.0.0"
 
@@ -114,7 +116,7 @@ dependencies {
     testImplementation 'org.mockito:mockito-inline:3.12.4'
 
     testImplementation "androidx.arch.core:core-testing:2.1.0" // InstantTaskExecutorRule
-    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.1" //TestCoroutineDispatcher
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4" //TestCoroutineDispatcher
     testImplementation 'org.mockito:mockito-core:3.12.4'
     testImplementation 'org.mockito:mockito-inline:3.12.4'
     testImplementation("com.squareup.okhttp3:mockwebserver:4.9.3")
@@ -124,7 +126,7 @@ dependencies {
     //androidTestImplementation
     androidTestImplementation "androidx.arch.core:core-testing:2.1.0" // InstantTaskExecutorRule
     androidTestImplementation "com.google.truth:truth:1.0.1"
-    androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.1" //TestCoroutineDispatcher
+    androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4" //TestCoroutineDispatcher
     androidTestImplementation("com.squareup.okhttp3:mockwebserver:4.9.3")
     androidTestImplementation("io.strikt:strikt-core:0.31.0")
     androidTestImplementation 'com.android.support.test.espresso:espresso-contrib:3.0.2' //RecyclerViewActions
