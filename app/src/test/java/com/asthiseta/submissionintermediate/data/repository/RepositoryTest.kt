@@ -15,7 +15,6 @@ import com.asthiseta.submissionintermediate.testUtilities.PagedTestDataSources.C
 import com.asthiseta.submissionintermediate.testUtilities.getOrAwaitValue
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import com.google.common.truth.Truth.assertThat
-import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
 import org.junit.Rule
@@ -106,7 +105,7 @@ class RepositoryTest {
     }
 
     @Test
-    fun `when getStoriesData should not Null`() = runTest{
+    fun `verify getStoriesData should not Null`() = runTest{
         val dummyListStory = DummyData.generateDummyStoryResponseData()
         val storiesData = PagedTestDataSources.itemSnapshot(dummyListStory)
 
@@ -137,22 +136,100 @@ class RepositoryTest {
     }
 
     @Test
-    fun getStoriesWithLocation() {
+    fun `verify getStoriesData with location is working`() {
+        val dummyToken = "dummyToken"
+        val dummyStoriesList = DummyData.generateDummyStoryResponseData()
+        val expectedData = MutableLiveData<List<Story>>()
+        expectedData.value = dummyStoriesList
+
+        repository.getStoriesWithLocation(dummyToken)
+
+        verify(repository).getStoriesWithLocation(dummyToken)
+
+        `when`(repository.storyList).thenReturn(expectedData)
+
+        val actualData = repository.storyList.getOrAwaitValue()
+
+        verify(repository).storyList
+
+        assertThat(actualData).isEqualTo(expectedData.value)
     }
 
     @Test
-    fun uploadStory() {
+    fun `verify uploadStory function is worked by checking the message response`() {
+        val dummyToken = "dummyToken"
+        val expectedData = MutableLiveData<String>()
+        expectedData.value = "dummyListStory"
+
+        repository.uploadStory(dummyToken, dummyMockFile, "this is description")
+
+        verify(repository).uploadStory(dummyToken, dummyMockFile, "this is description")
+
+        `when`(repository.message).thenReturn(expectedData)
+
+        val actualData = repository.message.getOrAwaitValue()
+
+        verify(repository).message
+        assertThat(actualData).isEqualTo(expectedData.value)
     }
 
     @Test
-    fun uploadStoryWithLocation() {
+    fun `verify uploadStoryWithLocation function is worked by checking the message response`() {
+        val dummyToken = "dummyToken"
+        val expectedData = MutableLiveData<String>()
+        expectedData.value = "dummyListStory"
+
+        repository.uploadStoryWithLocation(dummyToken, dummyMockFile, "this is description", 42.069F, 69.420F  )
+
+        verify(repository).uploadStory(dummyToken, dummyMockFile, "this is description")
+
+        `when`(repository.message).thenReturn(expectedData)
+
+        val actualData = repository.message.getOrAwaitValue()
+
+        verify(repository).message
+        assertThat(actualData).isEqualTo(expectedData.value)
     }
 
     @Test
-    fun doLoginUser() {
+    fun `verifiy doLoginUser function is works by check the return value should be UserLoginResult`() {
+        val dummyEmail = "someone@gmail.com"
+        val dummyPassword = "someonePassHere"
+        val dummyLoginResult = UserLoginResult("someone@gmail.com", "someonePassHere", "someId")
+
+        val expectedData = MutableLiveData<UserLoginResult>()
+        expectedData.value = dummyLoginResult
+
+        repository.doLoginUser(dummyEmail, dummyPassword)
+        verify(repository).doLoginUser(dummyEmail, dummyPassword)
+
+        `when`(repository.userLogin).thenReturn(expectedData)
+
+        val actualData = repository.userLogin.getOrAwaitValue()
+
+        verify(repository).userLogin
+        assertThat(actualData).isEqualTo(expectedData.value)
     }
 
     @Test
-    fun doRegisterUser() {
+    fun `verify doRegisterUser function is works by check the isLoading value when its called`() {
+        val dummyName = "someone"
+        val dummyEmail = "someone@gmail.com"
+        val dummyPassword = "someonePassHere"
+        val expectedData = MutableLiveData<Boolean>()
+        expectedData.value = true
+
+        repository.doRegisterUser(dummyName, dummyEmail, dummyPassword)
+
+        verify(repository).doRegisterUser(dummyName, dummyEmail, dummyPassword)
+
+        `when`(repository.isLoading).thenReturn(expectedData)
+
+        val actualDAta = repository.isLoading.getOrAwaitValue()
+
+        verify(repository).isLoading
+        assertThat(actualDAta).isEqualTo(expectedData.value)
     }
+
+
 }
