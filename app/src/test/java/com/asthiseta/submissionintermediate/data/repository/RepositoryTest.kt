@@ -154,6 +154,8 @@ class RepositoryTest {
         verify(repository).storyList
 
         assertThat(actualData).isEqualTo(expectedData.value)
+        assertThat(actualData[0].lon).isNotNull()
+        assertThat(actualData[0].lat).isNotNull()
     }
 
     @Test

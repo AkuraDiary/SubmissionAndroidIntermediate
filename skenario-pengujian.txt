@@ -2,7 +2,7 @@ Skenario testing submissionintermediate 2
 
 === UNIT TEST ===
 
-RepositoryTest (Repository.kt)
+RepositoryTest.kt => Repository.kt 
 
 1 . when get userLogin should return LiveData UserLoginResult
 - memastikan mengembalikan nilai berupa LiveData<UserLoginResult> saat mendapatkan value dari userLogin
@@ -29,6 +29,8 @@ RepositoryTest (Repository.kt)
 6 . verify getStoriesData with location is working
 - memverifikasi fungsi getStoriesWithLocation bekerja dengan semestinya
 - memastikan returned data sama seperti expectedData
+- memastikan nilai longitude returned data di index ke 0 tidak bernilai Null
+- memastikan nilai latitude returned data di index ke 0 tidak bernilai Null
 
 7 . verify uploadStory function is worked by checking the message response
 - memverifikasi fungsi uploadStory bekerja dengan semestinya
@@ -47,7 +49,7 @@ RepositoryTest (Repository.kt)
 - memastikan returned data sama seperti expectedData
 
 
-UploadVMTest (UploadVM.kt)
+UploadVMTest.kt => UploadVM.kt
 
 1 . when get message should return LiveData String
 - memastikan mengembalikan nilai berupa LiveData<String> ketika mendapatkan value dari message
@@ -62,7 +64,7 @@ UploadVMTest (UploadVM.kt)
 - memastikan returned data sama seperti expectedData
 
 
-AuthVMTest (AuthVM.kt)
+AuthVMTest.kt => AuthVM.kt
 
 1 . when get usrLogin from viewmodel should return LiveData UserLoginResult
 - memastikan mengembalikan nilai berupa LiveData<UserLoginResult> saat mendapatkan value usrLogin dari authVM
@@ -77,13 +79,26 @@ AuthVMTest (AuthVM.kt)
 - memastikan returned data sama seperti expectedData
 
 
-9 . verify doLogin function in view model works
+4 . verify doLogin function in view model works
 - memverifikasi fungsi doLoginUser bekerja dengan semestinya
 - memastikan returned data sama seperti expectedData
 
-10 . verify doRegister function in view model works
+5 . verify doRegister function in view model works
 - memverifikasi fungsi doRegisterUser bekerja dengan semestinya
 - memastikan returned data sama seperti expectedData
+
+
+MapsVMTest.kt => MapsVM.kt
+
+1 . when get storyList should return LiveData List Story
+- memastikan mengembalikan nilai berupa LiveData<List<Story>> saat mendapatkan value dari storyList
+- memastikan returned data sama seperti expectedData
+
+2 . verify getStoriesWithLocations function in viewmodel works
+- memverifikasi fungsi getStoriesWithLocation bekerja dengan semestinya
+- memastikan returned data sama seperti expectedData
+- memastikan nilai longitude returned data di index ke 0 tidak bernilai Null
+- memastikan nilai latitude returned data di index ke 0 tidak bernilai Null
 
 
 === UNIT TEST ===
