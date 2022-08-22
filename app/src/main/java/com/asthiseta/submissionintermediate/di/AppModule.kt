@@ -3,6 +3,7 @@ package com.asthiseta.submissionintermediate.di
 import android.content.Context
 import androidx.room.Room
 import com.asthiseta.submissionintermediate.BuildConfig
+import com.asthiseta.submissionintermediate.MyApplication.Companion.BASE_URL
 import com.asthiseta.submissionintermediate.data.local.room.StoryDatabase
 import com.asthiseta.submissionintermediate.data.remote.ApiService
 import dagger.Module
@@ -46,7 +47,7 @@ object AppModule {
             .addInterceptor(loggingInterceptor)
             .build()
         return Retrofit.Builder()
-            .baseUrl(BuildConfig.BASE_URL)
+            .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)
             .build()

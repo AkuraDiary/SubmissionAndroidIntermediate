@@ -1,0 +1,96 @@
+{
+  "error": false,
+  "message": "Stories fetched successfully",
+  "listStory": [
+    {
+      "id": "story-zly9FOpJLpPu50pg",
+      "name": "long ass name just because i can and i want you guys to handle stupidly long name that may overflow ur textview and breaks ur layout so yea",
+      "description": "ಠ ೧ ಠ",
+      "photoUrl": "https://story-api.dicoding.dev/images/stories/photos-1650600013010_-w9z9xjs.jpg",
+      "createdAt": "2022-04-22T04:00:13.012Z",
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "story-DjxlQPxvImmFuBr_",
+      "name": "deus",
+      "description": "tes",
+      "photoUrl": "https://story-api.dicoding.dev/images/stories/photos-1650600260501_F4vfoTba.jpg",
+      "createdAt": "2022-04-22T04:04:20.505Z",
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "story-OjiowqqPFGn_ed9L",
+      "name": "deus",
+      "description": "tes",
+      "photoUrl": "https://story-api.dicoding.dev/images/stories/photos-1650599924305_AzZ6kRBO.jpg",
+      "createdAt": "2022-04-22T03:58:44.306Z",
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "story-WEMVvzl_AE_FcGIJ",
+      "name": "deus",
+      "description": "tes",
+      "photoUrl": "https://story-api.dicoding.dev/images/stories/photos-1650599934060_svf8mrl3.jpg",
+      "createdAt": "2022-04-22T03:58:54.061Z",
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "story-sxTSm9ZDD3zt_U_g",
+      "name": "arief",
+      "description": "apa ini hayoo",
+      "photoUrl": "https://story-api.dicoding.dev/images/stories/photos-1650600511364_phXBgqms.jpg",
+      "createdAt": "2022-04-22T04:08:31.371Z",
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "story-aWFL45G4JDJBWlJ5",
+      "name": "Jaya Antara",
+      "description": "jjjajjas",
+      "photoUrl": "https://story-api.dicoding.dev/images/stories/photos-1650599995821_oGjixtKx.JPEG",
+      "createdAt": "2022-04-22T03:59:55.825Z",
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "story-T5XGNH0gNx_OEw5y",
+      "name": "alip",
+      "description": "tes\n",
+      "photoUrl": "https://story-api.dicoding.dev/images/stories/photos-1650600145473_FbX50Tef.jpg",
+      "createdAt": "2022-04-22T04:02:25.474Z",
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "story-s567F4-eBLtCfh5J",
+      "name": "a",
+      "description": "maps checkk\n",
+      "photoUrl": "https://story-api.dicoding.dev/images/stories/photos-1650600183864_zT_4ToxE.jpg",
+      "createdAt": "2022-04-22T04:03:03.870Z",
+      "lat": -6.2174907,
+      "lon": 106.850555
+    },
+    {
+      "id": "story-WUgHva08ZPpsnX5V",
+      "name": "deus",
+      "description": "tes",
+      "photoUrl": "https://story-api.dicoding.dev/images/stories/photos-1650600025918_MGgh7dyT.jpg",
+      "createdAt": "2022-04-22T04:00:25.924Z",
+      "lat": null,
+      "lon": null
+    },
+    {
+      "id": "story-2qT8fvX6VccMv6lP",
+      "name": "reviewer37",
+      "description": "cam",
+      "photoUrl": "https://story-api.dicoding.dev/images/stories/photos-1650599789760_B_yL_ocg.jpg",
+      "createdAt": "2022-04-22T03:56:29.764Z",
+      "lat": null,
+      "lon": null
+    }
+  ]
+}

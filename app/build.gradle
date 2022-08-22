@@ -129,7 +129,7 @@ dependencies {
     androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4" //TestCoroutineDispatcher
     androidTestImplementation("com.squareup.okhttp3:mockwebserver:4.9.3")
     androidTestImplementation("io.strikt:strikt-core:0.31.0")
-    androidTestImplementation 'com.android.support.test.espresso:espresso-contrib:3.0.2' //RecyclerViewActions
+    androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.4.0'//RecyclerViewActions
     androidTestImplementation "com.squareup.okhttp3:mockwebserver:4.9.3"
     androidTestImplementation "com.squareup.okhttp3:okhttp-tls:4.9.3"
 
