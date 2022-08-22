@@ -100,5 +100,22 @@ MapsVMTest.kt => MapsVM.kt
 - memastikan nilai longitude returned data di index ke 0 tidak bernilai Null
 - memastikan nilai latitude returned data di index ke 0 tidak bernilai Null
 
+HomeViewModelTest.kt => HomeViewModel.kt
+
+1 . when get isLoading from view model should return LiveData Boolean
+- memastikan mengembalikan nilai berupa LiveData<String> saat mendapatkan value message dari authVM
+- memastikan returned data sama seperti expectedData
+
+2 . when get message from view model should return LiveData Boolean
+- memastikan mengembalikan nilai berupa LiveData<Boolean> saat mendapatkan value isLoading dari authVM
+- memastikan returned data sama seperti expectedData
+
+3. when get stories should not Null
+- memastikan getStoriesdata mengembalikan nilai LiveData<PagingData<Story>>>
+- memastikan data kembalian tidak null
+- memastikan jumlah data sama dengan yang diharapkan
+- memastikan data duggaan dan data sebenarnya di index ke 0 sama dengan memeriksa nilai name
+
+
 
 === UNIT TEST ===
