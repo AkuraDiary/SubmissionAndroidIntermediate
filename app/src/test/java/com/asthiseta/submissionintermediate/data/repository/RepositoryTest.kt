@@ -46,7 +46,7 @@ class RepositoryTest {
 
 
     @Test
-    fun `when get userLogin should return UserLoginResult`() {
+    fun `when get userLogin should return LiveData UserLoginResult`() {
         val expectedData = MutableLiveData<UserLoginResult>()
         val dummyUserResult = UserLoginResult(
             "dummyUser",

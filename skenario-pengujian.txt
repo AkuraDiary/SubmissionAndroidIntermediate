@@ -1,0 +1,49 @@
+Skenario testing submissionintermediate 2
+
+=== UNIT TEST ===
+
+RepositoryTest (Repository.kt)
+
+1 . when get userLogin should return LiveData UserLoginResult
+- memastikan mengembalikan nilai berupa LiveData<UserLoginResult> saat mendapatkan value dari userLogin
+- memastikan dummyData sesuai dengan expectedData
+
+2 . when get message should return LiveData String
+- memastikan mengembalikan nilai berupa LiveData<String> saat mendapatkan value dari message
+- memastikan dummyData sesuai dengan expectedData
+
+3 . when get isLoading should return LiveData Boolean
+- memastikan mengembalikan nilai berupa LiveData<Boolean> saat mendapatkan value dari isLoading
+- memastikan dummyData sesuai dengan expectedData
+
+4 . when get listStory should return LiveData List Story
+- memastikan mengembalikan nilai berupa LiveData<List<Story>> saat mendapatkan value dari storyList
+- memastikan dummyData sesuai dengan expectedData
+
+5 . verify getStoriesData should not Null
+- memastikan getStoriesdata mengembalikan nilai LiveData<PagingData<Story>>>
+- memastikan data kembalian tidak null
+- memastikan jumlah data sama dengan yang diharapkan
+- memastikan data duggaan dan data sebenarnya di index ke 0 sama dengan memeriksa nilai name
+
+6 . verify getStoriesData with location is working
+- memverifikasi fungsi getStoriesWithLocation bekerja dengan semestinya
+- memastikan dummyData sesuai dengan expectedData
+
+7 . verify uploadStory function is worked by checking the message response
+- memverifikasi fungsi uploadStory bekerja dengan semestinya
+- memastikan dummyData sesuai dengan expectedData
+
+8 . verify uploadStoryWithLocation function is worked by checking the message response
+- memverifikasi fungsi uploadStoryWithLocation bekerja dengan semestinya
+- memastikan dummyData sesuai dengan expectedData
+
+9 . verifiy doLoginUser function is works by check the return value should be UserLoginResult
+- memverifikasi fungsi doLoginUser bekerja dengan semestinya
+- memastikan dummyData sesuai dengan expectedData
+
+10 . verify doRegisterUser function is works by check the isLoading value when its called
+- memverifikasi fungsi doRegisterUser bekerja dengan semestinya
+- memastikan dummyData sesuai dengan expectedData
+
+=== UNIT TEST ===
