@@ -116,6 +116,23 @@ HomeViewModelTest.kt => HomeViewModel.kt
 - memastikan jumlah data sama dengan yang diharapkan
 - memastikan data duggaan dan data sebenarnya di index ke 0 sama dengan memeriksa nilai name
 
+DataStoreVMTest.kt => DataStoreVM.kt
+
+1 . getLoginSession should not return null and should success
+- memverifikasi fungsi getLoginSession bekerja dengan semestinya
+- memastikan mengembalikan nilai berupa LiveData<UsrSession> saat fungsi getLoginSession dipanggil
+- memastikan returned data sama seperti expectedData
+
+2 . verify setLoginSession function is works
+- memasukkan data dummy kedalam fungsi setLoginSession
+- memverifikasi fungsi setLoginSession bekerja dengan semestinya
+- memastikan data tidak null
+
+3. verify logout fucntion is works
+- melakukan simulasi login
+- memanggil fungsi logout dan memverifikasi fungsi logout bekerja dengan semestinya
+- mengambil data setelah logout
+- memastikan nilai isLoggin di data setelah logout adalah false
 
 
 === UNIT TEST ===
