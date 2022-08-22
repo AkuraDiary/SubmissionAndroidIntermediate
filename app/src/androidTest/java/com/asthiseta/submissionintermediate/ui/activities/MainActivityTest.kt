@@ -58,7 +58,7 @@ class MainActivityTest{
             .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
 
         onView(withId(R.id.rv_story))
-            .perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(5))
+            .perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(7))
     }
 
     @Test

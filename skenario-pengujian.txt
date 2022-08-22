@@ -142,6 +142,16 @@ DataStoreVMTest.kt => DataStoreVM.kt
 
 === INSTRUMENTATION TEST ===
 
+MainActivityTest.kt
 
+1 . getListStory_responseSuccess
+- melakukan mock server dengan response code success (200)
+- melakukan cek apakah rv_story muncul atau tidak
+- melakukan scroll rv_story ke item urutan ke 7
+
+2 . getListStory_toMapView
+- melakukan mock server dengan response code success (200)
+- melakukan cek apakah fab_toMap tampil atau tidak
+- melakukan action click pada fab_toMap
 
 === INSTRUMENTATION TEST ===
