@@ -1,6 +1,7 @@
 @file:OptIn(ExperimentalCoroutinesApi::class)
 
 package com.asthiseta.submissionintermediate.data.repository
+
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.AsyncPagingDataDiffer
@@ -105,7 +106,7 @@ class RepositoryTest {
     }
 
     @Test
-    fun `verify getStoriesData should not Null`() = runTest{
+    fun `verify getStoriesData should not Null`() = runTest {
         val dummyListStory = DummyData.generateDummyStoryResponseData()
         val storiesData = PagedTestDataSources.itemSnapshot(dummyListStory)
 
@@ -161,9 +162,17 @@ class RepositoryTest {
         val expectedData = MutableLiveData<String>()
         expectedData.value = "dummyListStory"
 
-        repository.uploadStory(dummyToken, dummyMockFile, "this is description")
+        repository.uploadStory(
+            dummyToken,
+            dummyMockFile,
+            "this is description"
+        )
 
-        verify(repository).uploadStory(dummyToken, dummyMockFile, "this is description")
+        verify(repository).uploadStory(
+            dummyToken,
+            dummyMockFile,
+            "this is description"
+        )
 
         `when`(repository.message).thenReturn(expectedData)
 
@@ -179,9 +188,21 @@ class RepositoryTest {
         val expectedData = MutableLiveData<String>()
         expectedData.value = "dummyListStory"
 
-        repository.uploadStoryWithLocation(dummyToken, dummyMockFile, "this is description", 42.069F, 69.420F  )
+        repository.uploadStoryWithLocation(
+            dummyToken,
+            dummyMockFile,
+            "this is description",
+            42.069F,
+            69.420F
+        )
 
-        verify(repository).uploadStory(dummyToken, dummyMockFile, "this is description")
+        verify(repository).uploadStoryWithLocation(
+            dummyToken,
+            dummyMockFile,
+            "this is description",
+            42.069F,
+            69.420F
+        )
 
         `when`(repository.message).thenReturn(expectedData)
 
