@@ -18,7 +18,7 @@ RepositoryTest (Repository.kt)
 
 4 . when get listStory should return LiveData List Story
 - memastikan mengembalikan nilai berupa LiveData<List<Story>> saat mendapatkan value dari storyList
-- memastikan dummyData sesuai dengan expectedData
+- memastikan expectedData dengan dummyData yang dipakai
 
 5 . verify getStoriesData should not Null
 - memastikan getStoriesdata mengembalikan nilai LiveData<PagingData<Story>>>
@@ -28,22 +28,38 @@ RepositoryTest (Repository.kt)
 
 6 . verify getStoriesData with location is working
 - memverifikasi fungsi getStoriesWithLocation bekerja dengan semestinya
-- memastikan dummyData sesuai dengan expectedData
+- memastikan expectedData dengan dummyData yang dipakai
 
 7 . verify uploadStory function is worked by checking the message response
 - memverifikasi fungsi uploadStory bekerja dengan semestinya
-- memastikan dummyData sesuai dengan expectedData
+- memastikan expectedData dengan dummyData yang dipakai
 
 8 . verify uploadStoryWithLocation function is worked by checking the message response
 - memverifikasi fungsi uploadStoryWithLocation bekerja dengan semestinya
-- memastikan dummyData sesuai dengan expectedData
+- memastikan expectedData dengan dummyData yang dipakai
 
 9 . verifiy doLoginUser function is works by check the return value should be UserLoginResult
 - memverifikasi fungsi doLoginUser bekerja dengan semestinya
-- memastikan dummyData sesuai dengan expectedData
+- memastikan expectedData dengan dummyData yang dipakai
 
 10 . verify doRegisterUser function is works by check the isLoading value when its called
 - memverifikasi fungsi doRegisterUser bekerja dengan semestinya
-- memastikan dummyData sesuai dengan expectedData
+- memastikan expectedData dengan dummyData yang dipakai
+
+
+UploadVMTest (UploadVM.kt)
+
+1 . when get message should return LiveData String
+- memastikan mengembalikan nilai berupa LiveData<String> ketika mendapatkan value dari message
+- memastikan expectedData dengan dummyData yang dipakai
+
+7 . verify uploadStory function is worked by checking the message response
+- memverifikasi fungsi uploadStory yang ada di viewmodel bekerja dengan semestinya
+- memastikan expectedData dengan dummyData yang dipakai
+
+3 . verify uploadStoryWithLocation function is works by checking the message value
+- memverifikasi fungsi uploadStoryWithLocation yang ada di viewmodel bekerja dengan semestinya
+- memastikan expectedData dengan dummyData yang dipakai
+
 
 === UNIT TEST ===
