@@ -6,19 +6,19 @@ RepositoryTest (Repository.kt)
 
 1 . when get userLogin should return LiveData UserLoginResult
 - memastikan mengembalikan nilai berupa LiveData<UserLoginResult> saat mendapatkan value dari userLogin
-- memastikan dummyData sesuai dengan expectedData
+- memastikan returned data sama seperti expectedData
 
 2 . when get message should return LiveData String
 - memastikan mengembalikan nilai berupa LiveData<String> saat mendapatkan value dari message
-- memastikan dummyData sesuai dengan expectedData
+- memastikan returned data sama seperti expectedData
 
 3 . when get isLoading should return LiveData Boolean
 - memastikan mengembalikan nilai berupa LiveData<Boolean> saat mendapatkan value dari isLoading
-- memastikan dummyData sesuai dengan expectedData
+- memastikan returned data sama seperti expectedData
 
 4 . when get listStory should return LiveData List Story
 - memastikan mengembalikan nilai berupa LiveData<List<Story>> saat mendapatkan value dari storyList
-- memastikan expectedData dengan dummyData yang dipakai
+- memastikan returned data sama seperti expectedData
 
 5 . verify getStoriesData should not Null
 - memastikan getStoriesdata mengembalikan nilai LiveData<PagingData<Story>>>
@@ -28,38 +28,62 @@ RepositoryTest (Repository.kt)
 
 6 . verify getStoriesData with location is working
 - memverifikasi fungsi getStoriesWithLocation bekerja dengan semestinya
-- memastikan expectedData dengan dummyData yang dipakai
+- memastikan returned data sama seperti expectedData
 
 7 . verify uploadStory function is worked by checking the message response
 - memverifikasi fungsi uploadStory bekerja dengan semestinya
-- memastikan expectedData dengan dummyData yang dipakai
+- memastikan returned data sama seperti expectedData
 
 8 . verify uploadStoryWithLocation function is worked by checking the message response
 - memverifikasi fungsi uploadStoryWithLocation bekerja dengan semestinya
-- memastikan expectedData dengan dummyData yang dipakai
+- memastikan returned data sama seperti expectedData
 
 9 . verifiy doLoginUser function is works by check the return value should be UserLoginResult
 - memverifikasi fungsi doLoginUser bekerja dengan semestinya
-- memastikan expectedData dengan dummyData yang dipakai
+- memastikan returned data sama seperti expectedData
 
 10 . verify doRegisterUser function is works by check the isLoading value when its called
 - memverifikasi fungsi doRegisterUser bekerja dengan semestinya
-- memastikan expectedData dengan dummyData yang dipakai
+- memastikan returned data sama seperti expectedData
 
 
 UploadVMTest (UploadVM.kt)
 
 1 . when get message should return LiveData String
 - memastikan mengembalikan nilai berupa LiveData<String> ketika mendapatkan value dari message
-- memastikan expectedData dengan dummyData yang dipakai
+- memastikan returned data sama seperti expectedData
 
-7 . verify uploadStory function is worked by checking the message response
+2 . verify uploadStory function is worked by checking the message response
 - memverifikasi fungsi uploadStory yang ada di viewmodel bekerja dengan semestinya
-- memastikan expectedData dengan dummyData yang dipakai
+- memastikan returned data sama seperti expectedData
 
 3 . verify uploadStoryWithLocation function is works by checking the message value
 - memverifikasi fungsi uploadStoryWithLocation yang ada di viewmodel bekerja dengan semestinya
-- memastikan expectedData dengan dummyData yang dipakai
+- memastikan returned data sama seperti expectedData
+
+
+AuthVMTest (AuthVM.kt)
+
+1 . when get usrLogin from viewmodel should return LiveData UserLoginResult
+- memastikan mengembalikan nilai berupa LiveData<UserLoginResult> saat mendapatkan value usrLogin dari authVM
+- memastikan returned data sama seperti expectedData
+
+2 . when get message from viewmodel should return LiveData String
+- memastikan mengembalikan nilai berupa LiveData<String> saat mendapatkan value message dari authVM
+- memastikan returned data sama seperti expectedData
+
+3 . when get isLoading from viewmodel should return LiveData Boolean
+- memastikan mengembalikan nilai berupa LiveData<Boolean> saat mendapatkan value isLoading dari authVM
+- memastikan returned data sama seperti expectedData
+
+
+9 . verify doLogin function in view model works
+- memverifikasi fungsi doLoginUser bekerja dengan semestinya
+- memastikan returned data sama seperti expectedData
+
+10 . verify doRegister function in view model works
+- memverifikasi fungsi doRegisterUser bekerja dengan semestinya
+- memastikan returned data sama seperti expectedData
 
 
 === UNIT TEST ===
