@@ -14,8 +14,8 @@ import com.asthiseta.submissionintermediate.testUtilities.MainCoroutineRule
 import com.asthiseta.submissionintermediate.testUtilities.PagedTestDataSources
 import com.asthiseta.submissionintermediate.testUtilities.PagedTestDataSources.Companion.listUpdateCallback
 import com.asthiseta.submissionintermediate.testUtilities.getOrAwaitValue
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import com.google.common.truth.Truth.assertThat
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
 import org.junit.Rule

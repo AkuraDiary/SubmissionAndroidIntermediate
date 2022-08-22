@@ -2,7 +2,6 @@ package com.asthiseta.submissionintermediate.data.preferences
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
-import com.asthiseta.submissionintermediate.data.model.auth.UserLoginResult
 import com.asthiseta.submissionintermediate.data.model.auth.UsrSession
 import com.asthiseta.submissionintermediate.testUtilities.getOrAwaitValue
 import com.google.common.truth.Truth.assertThat
