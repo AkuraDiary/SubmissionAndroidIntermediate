@@ -77,21 +77,23 @@ class UploadStoryActivity : AppCompatActivity() {
                 || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
     }
 
-    private val getMyLocLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-        if (it.resultCode == RESULT_OK) {
-            val lat = it.data?.getDoubleExtra("latitude", 0.0)
-            val lng = it.data?.getDoubleExtra("longitude", 0.0)
-            _latitude = lat
-            _longitude = lng
-            FancyToast.makeText(
-                this@UploadStoryActivity,
-                "Location Added",
-                FancyToast.LENGTH_LONG,
-                FancyToast.SUCCESS,
-                false
-            ).show()
+    private val getMyLocLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            if (it.resultCode == RESULT_OK) {
+                val lat = it.data?.getDoubleExtra("latitude", 0.0)
+                val lng = it.data?.getDoubleExtra("longitude", 0.0)
+                _latitude = lat
+                _longitude = lng
+                FancyToast.makeText(
+                    this@UploadStoryActivity,
+                    "Location Added",
+                    FancyToast.LENGTH_LONG,
+                    FancyToast.SUCCESS,
+                    false
+                ).show()
+            }
         }
-    }
+
     private fun getMyLocationToShare() {
         if (!isLocationEnabled()) {
             showLocationNotEnabledDialog()
@@ -220,11 +222,19 @@ class UploadStoryActivity : AppCompatActivity() {
     }
 
     private fun uploadStory() {
-        if (getFile != null) {
-            val file = reduceFileImage(getFile as File)
-            val descriptionText = binding.editTextAddDescription.text.toString()
-            dataStoreVM.getLoginSession().observe(this) {
+        val descriptionText = binding.editTextAddDescription.text.toString()
+        if (getFile != null && descriptionText.isNotEmpty()) {
 
+            FancyToast.makeText(
+                this@UploadStoryActivity,
+                "Uploading.... please wait",
+                FancyToast.LENGTH_LONG,
+                FancyToast.INFO,
+                false
+            ).show()
+
+            val file = reduceFileImage(getFile as File)
+            dataStoreVM.getLoginSession().observe(this) {
                 uploadVM.apply {
                     if (_latitude != null && _longitude != null) {
                         uploadStoryWithLocation(
@@ -245,25 +255,38 @@ class UploadStoryActivity : AppCompatActivity() {
                             FancyToast.INFO,
                             false
                         ).show()
+
+                        onBackPressed()
                     }
                 }
             }
-            onBackPressed()
+
         } else {
-            FancyToast.makeText(
-                this@UploadStoryActivity,
-                "Silahkan masukkan gambar terlebih dahulu.",
-                FancyToast.LENGTH_SHORT,
-                FancyToast.ERROR,
-                false
-            ).show()
+            if (descriptionText.isEmpty()) {
+                FancyToast.makeText(
+                    this@UploadStoryActivity,
+                    "Silahkan masukkan deskripsi terlebih dahulu.",
+                    FancyToast.LENGTH_SHORT,
+                    FancyToast.ERROR,
+                    false
+                ).show()
+            } else {
+                FancyToast.makeText(
+                    this@UploadStoryActivity,
+                    "Silahkan masukkan gambar terlebih dahulu.",
+                    FancyToast.LENGTH_SHORT,
+                    FancyToast.ERROR,
+                    false
+                ).show()
+            }
         }
-
     }
 
-    companion object {
-        private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
-        private const val REQUEST_CODE_PERMISSIONS = 10
-        const val MY_LOCATION_TO_SHARE = 11
-    }
+
+
+companion object {
+    private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
+    private const val REQUEST_CODE_PERMISSIONS = 10
+    const val MY_LOCATION_TO_SHARE = 11
+}
 }

@@ -91,16 +91,16 @@ class HomeFragment : Fragment() {
             fabAddStory.setOnClickListener {
 
                 val intent = Intent(requireActivity(), UploadStoryActivity::class.java)
-                startActivity(intent)
                 FragmentManager.POP_BACK_STACK_INCLUSIVE
-                requireActivity().finish()
+                startActivity(intent)
+                (activity as MainActivity).finish()
             }
 
             fabToMap.setOnClickListener{
                 val intent = Intent(requireActivity(), StoryMapsActivity::class.java)
-                startActivity(intent)
                 FragmentManager.POP_BACK_STACK_INCLUSIVE
-                requireActivity().finish()
+                startActivity(intent)
+                (activity as MainActivity).finish()
             }
         }
     }
