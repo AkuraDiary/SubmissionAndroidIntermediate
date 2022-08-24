@@ -27,9 +27,11 @@ interface ApiService {
     ): Call<UserLoginResponse>
 
     @GET("stories")
-    fun getAllStory(
-        @Header("Authorization") auth: String
-    ): Call<StoryListResponse>
+    suspend fun getAllStory(
+        @Header("Authorization") auth: String,
+        @Query("page") page: Int,
+        @Query("size") size: Int
+    ): StoryListResponse
 
     @Multipart
     @POST("stories")
@@ -37,5 +39,21 @@ interface ApiService {
         @Header("Authorization") auth: String,
         @Part file: MultipartBody.Part,
         @Part("description") description: RequestBody,
+    ): Call<AddStoryResponse>
+
+    @GET("stories")
+    fun getAllStoryWithLocation(
+        @Header("Authorization") auth: String,
+        @Query("location")location: Int
+    ): Call<StoryListResponse>
+
+    @Multipart
+    @POST("stories")
+    fun uploadStoryWithLocation(
+        @Header("Authorization") auth: String,
+        @Part file: MultipartBody.Part,
+        @Part("description") description: RequestBody,
+        @Part("lat")latitude: Float,
+        @Part("lon")longitude: Float
     ): Call<AddStoryResponse>
 }

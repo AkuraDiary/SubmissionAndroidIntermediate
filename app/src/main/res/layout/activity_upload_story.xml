@@ -20,18 +20,19 @@
         app:srcCompat="@drawable/ic_insert_photo"
         android:contentDescription="@string/contentDescIV" />
 
-    <Button
+    <ImageButton
         android:id="@+id/btn_openCamera"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:drawableTop="@drawable/ic_camera"
+        android:src="@drawable/ic_camera"
         android:padding="5dp"
         android:text="@string/ttxt_camera"
-        android:textColor="@color/white"
+        android:background="@color/neutral_700"
         app:layout_constraintBottom_toTopOf="@+id/textFieldDesc"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:contentDescription="@string/ttxt_camera" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
@@ -40,18 +41,19 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.5" />
 
-    <Button
+    <ImageButton
         android:id="@+id/btnOpenGallery"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginStart="8dp"
-        android:drawableTop="@drawable/ic_image"
-        android:padding="5dp"
-        android:text="@string/txt_galery"
-        android:textColor="@color/white"
+        android:padding="8dp"
+        android:src="@drawable/ic_image"
+        android:background="@color/neutral_700"
         app:layout_constraintBottom_toTopOf="@+id/textFieldDesc"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline" />
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewPreview"
+        android:contentDescription="@string/txt_upload_from_gallery" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textFieldDesc"
@@ -85,4 +87,17 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/fab_addLocation"
+        app:icon="@drawable/ic_my_location"
+        app:iconTint="@color/white"
+        android:textColor="@color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:backgroundTint="@color/neutral_700"
+        android:layout_margin="8dp"
+        android:text="@string/txt_add_location"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewPreview"
+        app:layout_constraintEnd_toEndOf="@+id/imageViewPreview" />
 </androidx.constraintlayout.widget.ConstraintLayout>

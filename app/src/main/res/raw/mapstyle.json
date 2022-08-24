@@ -1,0 +1,36 @@
+[
+  {
+    "featureType": "road",
+    "stylers": [
+      {
+        "color": "#45f7eb"
+      },
+      {
+        "saturation": -55
+      },
+      {
+        "lightness": -30
+      }
+    ]
+  },
+  {
+    "featureType": "road",
+    "elementType": "labels.text",
+    "stylers": [
+      {
+        "color": "#fde0ff"
+      },
+      {
+        "weight": 0.5
+      }
+    ]
+  },
+  {
+    "featureType": "transit",
+    "stylers": [
+      {
+        "color": "#b593d7"
+      }
+    ]
+  }
+]

@@ -23,4 +23,9 @@
     <string name="txt_username">Username</string>
     <string name="txt_email">Email</string>
     <string name="txt_already_have_account">Already Have Account?</string>
+    <string name="txt_rto">Request Timed Out</string>
+    <string name="txt_retry">Retry</string>
+    <string name="title_activity_story_maps">StoryMapsActivity</string>
+    <string name="txt_add_location">Add Current Location</string>
+    <string name="txt_upload_from_gallery">Upload from gallery</string>
 </resources>
